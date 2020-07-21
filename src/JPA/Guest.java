@@ -44,6 +44,18 @@ public class Guest
 		this.datumOdjezdu = datumOdjezdu;
 	}
 	
+	public String[] getDataArray()
+	{
+		String[] data = new String[7];
+		data[0] = Integer.toString(ID);
+		data[1] = name;
+		data[2] = surrname;
+		data[3] = Integer.toString(bedsInRoom);
+		data[4] = datumPrijezdu;
+		data[5] = datumOdjezdu;
+		return data;
+	}
+	
 	public int getID() 
 	{
 		return ID;

@@ -38,6 +38,7 @@ public class DataTableForm extends JFrame
 	private JLabel[] label;
 	private String[] labelTexts = {"ID", "Name", "Surrname", "Email", "Bed count:", "From", "To"};
 	private String inputFormName;
+	
 	private Font mainFont;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
@@ -122,15 +123,12 @@ public class DataTableForm extends JFrame
         	contentPane.add(label[i], getGBC(i, 0));
         }
         setUpTextfield();
-        for(int i = 0; i < ID.length; i++)
+        for(int x = 0; x < textfield.length; x++)
         {
-        	contentPane.add(ID[i], getGBC(0, i + 1));
-        	contentPane.add(Name[i], getGBC(1, i + 1));
-        	contentPane.add(Surrname[i], getGBC(2, i + 1));
-        	contentPane.add(Email[i], getGBC(3, i + 1));
-        	contentPane.add(BedsInRoom[i], getGBC(4, i + 1));
-        	contentPane.add(From[i], getGBC(5, i + 1));
-        	contentPane.add(To[i], getGBC(6, i + 1));
+	        for(int i = 0; i < textfield[0].length; i++)
+		    {
+	        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
+		    }
         }
     }
     
@@ -147,46 +145,21 @@ public class DataTableForm extends JFrame
     
     private void setUpTextfield()
     {
-    	List guests1 = CJPA.getCJPA().getGuestList();
-    	List guests = CJPA.getCJPA().getGuestList();
-    	ID = new JTextField[guests.size()];
-    	Name = new JTextField[guests.size()];
-    	Surrname = new JTextField[guests.size()];
-    	Email = new JTextField[guests.size()];
-    	BedsInRoom = new JTextField[guests.size()];
-    	From = new JTextField[guests.size()];
-        To = new JTextField[guests.size()];
-    	for(int i = 0; i < ID.length; i++)
-    	{
-    		ID[i] = new JTextField();
-    		ID[i].setEnabled(false);
-    		ID[i].setText(Integer.toString(((Guest)guests.get(i)).getID()));
-    		ID[i].setFont(mainFont);
-    		Name[i] = new JTextField();
-    		Name[i].setEnabled(false);
-    		Name[i].setText(((Guest)guests.get(i)).getName());
-    		Name[i].setFont(mainFont);
-    		Surrname[i] = new JTextField();
-    		Surrname[i].setEnabled(false);
-    		Surrname[i].setText(((Guest)guests.get(i)).getSurrname());
-    		Surrname[i].setFont(f);
-    		Email[i] = new JTextField();
-    		Email[i].setEnabled(false);
-    		Email[i].setText(((Guest)guests.get(i)).getGuestEmail());
-    		Email[i].setFont(f);
-    		BedsInRoom[i] = new JTextField();
-    		BedsInRoom[i].setEnabled(false);
-    		BedsInRoom[i].setText(Integer.toString(((Guest)guests.get(i)).getBedsInRoom()));
-    		BedsInRoom[i].setFont(mainFont);
-    		From[i] = new JTextField();
-    		From[i].setEnabled(false);
-    		From[i].setText(((Guest)guests.get(i)).getDatumPrijezdu());
-    		From[i].setFont(mainFont);
-    		To[i] = new JTextField();
-            To[i].setEnabled(false);
-            To[i].setText(((Guest)guests.get(i)).getDatumOdjezdu());
-            To[i].setFont(mainFont);
-    	}
+    	List guests1 = CJPA.getCJPA().getList("SELECT c FROM Guests c");
+    	List data = CJPA.getCJPA().getList("SELECT c FROM Guest c");
+    	textfield = new JTextField[data.size()][labelTexts.length];
+    	String[] listData;
+    	for(int x = 0; x < textfield.length; x++)
+        {
+    		listData = ((Guest)data.get(x)).getDataArray();
+	        for(int i = 0; i < textfield[0].length; i++)
+		    {
+	        	textfield[x][i] = new JTextField();
+	        	textfield[x][i].setEnabled(false);
+	        	textfield[x][i].setText(listData[i]);
+	        	textfield[x][i].setFont(mainFont);
+		    }
+        }
     }
     
 	private GridBagConstraints getGBC(int x, int y)

@@ -20,9 +20,10 @@ import Forms.DataHolder;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
+ * Last Edit: 21.07.2020
  * Created By: Riyufuchi
  * 
- * */
+ */
 
 
 public class CJPA 
@@ -32,7 +33,7 @@ public class CJPA
     private Connection connection;
     private static String currDatabase;
     
-    //CJPA => Controller Java Persistance Api
+    //CJPA => Controller of Java Persistance Api
     private CJPA()
     {
         
@@ -83,19 +84,12 @@ public class CJPA
     }
     
     @SuppressWarnings("rawtypes")
-    public List getGuestList()
+    public List getList(String query)
     {
         em.getTransaction().begin();
-        Query q1 = em.createQuery("SELECT c FROM Guest c");
+        //Query q1 = em.createQuery("SELECT c FROM Guest c");
+        Query q1 = em.createQuery(query);
 		List list1 = q1.getResultList();
-		/*
-        for(Object element : list1) 
-        {
-            Guest g = (Guest)element;
-            System.out.println(g.getID());
-            System.out.println(g.getName());
-        }
-        */
         em.getTransaction().commit();
         //em.close();
         return list1;
