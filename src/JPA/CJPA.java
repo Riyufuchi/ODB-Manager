@@ -178,6 +178,14 @@ public class CJPA
 	{
 		return currDatabase;
 	}
+	
+	public void addMoney(int sum, String date)
+    {
+    	if(em != null)
+    	{
+    		em.persist(new Money(sum, date));
+    	}
+    }
     
     public void addGuest(DataHolder data)
     {

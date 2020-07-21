@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import JPA.CJPA;
 import JPA.Guest;
+import JPA.Money;
 import Utils.JMenuAutoCreator;
 
 /*
@@ -93,7 +94,7 @@ public class DataTableForm extends JFrame
     private void money()
     {
     	getQuery = "SELECT c FROM Money c";
-    	connectDatabase("Database/money.odb");
+    	connectDatabase("Database/Money.odb");
     }
     
     private void connectDatabase()
@@ -130,18 +131,27 @@ public class DataTableForm extends JFrame
     public void generujMenu()
     {
     	String[] menu = {"Database", "Operations", "Help"};
-    	String[] menuItems = {"Create", "Connect", "Exit", "", "Add", "Delete", "Refresh", "", "About"};
+    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Delete", "Refresh", "", "About"};
     	mac = new JMenuAutoCreator(menu, menuItems);
     	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
     		switch(mac.getMenuItem()[i].getName())
     		{
+    			case "Count": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	new Counter(false);
+    		            }
+    		        });
+    			break;
     			case "Add": 
     				mac.getMenuItem()[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            	new Counter();
+    		            	new Counter(true);
     		            }
     		        });
     			break;
@@ -160,6 +170,22 @@ public class DataTableForm extends JFrame
     		            public void actionPerformed(ActionEvent evt) 
     		            {
     		            	new DataConnectorForm("Connect Database", true);
+    		            }
+    		        });
+    			break;
+    			case "Refresh": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	setUpTextfield();
+    		                for(int x = 0; x < textfield.length; x++)
+    		                {
+    		        	        for(int i = 0; i < textfield[0].length; i++)
+    		        		    {
+    		        	        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
+    		        		    }
+    		                }
     		            }
     		        });
     			break;
@@ -205,15 +231,16 @@ public class DataTableForm extends JFrame
     
     private void setUpTextfield()
     {
-    	List guests1 = CJPA.getCJPA().getList(getQuery);
-    	List data = CJPA.getCJPA().getList(getQuery);
+    	List guests1 = odb.getList(getQuery);
+    	List data = odb.getList(getQuery);
     	textfield = new JTextField[data.size()][labelTexts.length];
     	String[] listData;
     	for(int x = 0; x < textfield.length; x++)
         {
-    		listData = ((Guest)data.get(x)).getDataArray();
+    		listData = ((Money)data.get(x)).getDataArray();
 	        for(int i = 0; i < textfield[0].length; i++)
 		    {
+	        	System.out.print(listData[i]);
 	        	textfield[x][i] = new JTextField();
 	        	textfield[x][i].setEnabled(false);
 	        	textfield[x][i].setText(listData[i]);

@@ -33,20 +33,20 @@ public class Counter extends JFrame
     private JButton button2;
     private JPanel contentPane;
     private JLabel[] label;
-    private String[] labelTexts = {"Bank accout:", "Paypal:", "Cash:", "Depths:", "Owns:"};
+    private String[] labelTexts = {"Bank accout:", "Paypal:", "Cash:", "Depths:", "Owns:", "Date:"};
     private ErrorWindow ew;
     private GridBagConstraints gbc;
-    private DataConnectorForm dcf;
+    private boolean justAdd;
     private DataHolder data;
     private boolean saveToDB;
     private Border borderTextfield;
     private CJPA odb;
     private JTextField[] textfield;
     
-    //pridat menu na obsluhovani databaze, zjistovani volnych pokoju, ukladani do databaze, moznost zadani delku pobytu, dynamicky pridavat ovladaci prvky
-    public Counter()
+    public Counter(boolean justAdd)
     {
         this.setTitle("Counter");
+        this.justAdd = justAdd;
         this.setSize(400,300);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -94,24 +94,49 @@ public class Counter extends JFrame
         button2.setBackground(new Color(214,217,223));
         button2.setForeground(new Color(0,0,0));
         button2.setText("Close");
-        vytvorLabely();
-        textfield = new JTextField[labelTexts.length];
-        for(int i = 0; i < textfield.length; i++)
+        if(justAdd)
         {
-        	textfield[i] = new JTextField();
-        	textfield[i].setName(labelTexts[i]);
+        	textfield = new JTextField[2];
+        	textfield[0] = new JTextField();
+        	textfield[0].setName("Sum");
+        	textfield[1] = new JTextField();
+        	textfield[1].setName("Date");
+        	label = new JLabel[2];
+        	label[0] = new JLabel("Sum:");
+        	label[1] = new JLabel("Date:");
+	        gbc = new GridBagConstraints();
+	        for(int i = 0; i < label.length; i++)
+	        {
+	        	contentPane.add(label[i], getGBC(0, i + 1));
+	        }
+	        for(int i = 0; i < textfield.length; i++)
+	        {
+	        	contentPane.add(textfield[i], getGBC(1, i + 1));
+	        }
+	        contentPane.add(button1, getGBC(1, 7));
+	        contentPane.add(button2, getGBC(0, 7));
         }
-        gbc = new GridBagConstraints();
-        for(int i = 0; i < labelTexts.length; i++)
+        else
         {
-        	contentPane.add(getLabely(i), getGBC(0, i + 1));
+	        vytvorLabely();
+	        textfield = new JTextField[labelTexts.length];
+	        for(int i = 0; i < textfield.length; i++)
+	        {
+	        	textfield[i] = new JTextField();
+	        	textfield[i].setName(labelTexts[i]);
+	        }
+	        gbc = new GridBagConstraints();
+	        for(int i = 0; i < labelTexts.length; i++)
+	        {
+	        	contentPane.add(getLabely(i), getGBC(0, i + 1));
+	        }
+	        for(int i = 0; i < textfield.length; i++)
+	        {
+	        	contentPane.add(textfield[i], getGBC(1, i + 1));
+	        }
+	        contentPane.add(button1, getGBC(1, 7));
+	        contentPane.add(button2, getGBC(0, 7));
         }
-        for(int i = 0; i < textfield.length; i++)
-        {
-        	contentPane.add(textfield[i], getGBC(1, i + 1));
-        }
-        contentPane.add(button1, getGBC(1, 7));
-        contentPane.add(button2, getGBC(0, 7));
     }
     
     private JLabel getLabely(int i)
@@ -173,12 +198,34 @@ public class Counter extends JFrame
     
     private void checkDataPersistance()
     {
-    	data.setName(basicCheck(textfield[0].getText(), 0, textfield[0]));
-    	data.setSurrname(basicCheck(textfield[1].getText(), 1, textfield[1]));
-    	if(saveToDB)
+    	if(justAdd)
     	{
-    		odb.addGuest(data);
-    		ew = new ErrorWindow("Zapis", "Host uspesne zapsan do databaze.");
+    		for(int i = 0; i < textfield.length; i++)
+	    	{
+	    		basicCheck(textfield[i].getText(), i, textfield[i]);
+	    	}
+    		if(saveToDB)
+	    	{
+	    		odb.addMoney(Integer.parseInt(textfield[0].getText()), textfield[1].getText());
+	    		ew = new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
+	    	}
+    	}
+    	else
+    	{
+	    	for(int i = 0; i < textfield.length; i++)
+	    	{
+	    		basicCheck(textfield[i].getText(), i, textfield[i]);
+	    	}
+	    	int money = 0;
+	    	for(int i = 0; i < textfield.length - 1; i++)
+	    	{
+	    		money = money + Integer.getInteger(textfield[i].getText());
+	    	}
+	    	if(saveToDB)
+	    	{
+	    		odb.addMoney(money, textfield[textfield.length].getText());
+	    		ew = new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
+	    	}
     	}
     }
     

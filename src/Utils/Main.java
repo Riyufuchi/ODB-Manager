@@ -16,7 +16,7 @@ public class Main
 {
 	public static void main(String[] args) 
 	{
-		new DataTableForm("Neutral");
+		new DataTableForm("Money");
 		//new BookingFormular("Hotel");
 	}
 }
