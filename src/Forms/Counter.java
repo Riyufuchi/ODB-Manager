@@ -32,6 +32,7 @@ public class Counter extends JFrame
     private JButton button1;
     private JButton button2;
     private JPanel contentPane;
+    private DataTableForm dtf;
     private JLabel[] label;
     private String[] labelTexts = {"Bank accout:", "Paypal:", "Cash:", "Depths:", "Owns:", "Date:"};
     private ErrorWindow ew;
@@ -43,10 +44,11 @@ public class Counter extends JFrame
     private CJPA odb;
     private JTextField[] textfield;
     
-    public Counter(boolean justAdd)
+    public Counter(boolean justAdd, DataTableForm dtf)
     {
         this.setTitle("Counter");
         this.justAdd = justAdd;
+        this.dtf = dtf;
         this.setSize(400,300);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -69,7 +71,7 @@ public class Counter extends JFrame
     private void pripojitDatabazi()
     {
     	odb = CJPA.getCJPA();
-    	odb.configFile();
+    	//odb.configFile();
     	if(!odb.getCurrDatabaseName().equals("null"))
     	{
     		odb.connectToDB(odb.getCurrDatabaseName());
@@ -206,7 +208,7 @@ public class Counter extends JFrame
 	    	}
     		if(saveToDB)
 	    	{
-	    		odb.addMoney(Integer.parseInt(textfield[0].getText()), textfield[1].getText());
+	    		odb.addMoney(Double.parseDouble(textfield[0].getText()), textfield[1].getText());
 	    		ew = new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
 	    	}
     	}
@@ -216,17 +218,18 @@ public class Counter extends JFrame
 	    	{
 	    		basicCheck(textfield[i].getText(), i, textfield[i]);
 	    	}
-	    	int money = 0;
+	    	double money = 0;
 	    	for(int i = 0; i < textfield.length - 1; i++)
 	    	{
-	    		money = money + Integer.getInteger(textfield[i].getText());
+	    		money = money + Double.parseDouble(textfield[i].getText());
 	    	}
 	    	if(saveToDB)
 	    	{
-	    		odb.addMoney(money, textfield[textfield.length].getText());
+	    		odb.addMoney(money, textfield[textfield.length-1].getText());
 	    		ew = new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
 	    	}
     	}
+    	dtf.nastavitOvladaciPrvky();
     }
     
     private void vytvoritUdalosti()

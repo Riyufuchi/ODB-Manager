@@ -94,7 +94,7 @@ public class DataTableForm extends JFrame
     private void money()
     {
     	getQuery = "SELECT c FROM Money c";
-    	connectDatabase("Database/Money.odb");
+    	connectDatabase();
     }
     
     private void connectDatabase()
@@ -128,10 +128,15 @@ public class DataTableForm extends JFrame
     	}
     }
     
+    private DataTableForm getDTF()
+    {
+    	return this;
+    }
+    
     public void generujMenu()
     {
     	String[] menu = {"Database", "Operations", "Help"};
-    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Delete", "Refresh", "", "About"};
+    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh", "", "About"};
     	mac = new JMenuAutoCreator(menu, menuItems);
     	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
@@ -142,7 +147,7 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            	new Counter(false);
+    		            	new Counter(false, getDTF());
     		            }
     		        });
     			break;
@@ -151,7 +156,7 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            	new Counter(true);
+    		            	new Counter(true, getDTF());
     		            }
     		        });
     			break;
@@ -200,7 +205,7 @@ public class DataTableForm extends JFrame
     	this.dispose();
     }
     
-    private void nastavitOvladaciPrvky()
+    public void nastavitOvladaciPrvky()
     {
         gbc = new GridBagConstraints();
         setUpLabels();

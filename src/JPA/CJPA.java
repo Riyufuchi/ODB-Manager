@@ -120,7 +120,7 @@ public class CJPA
     public void delateData(int id)
     {
     	em.getTransaction().begin();       
-    	Query q1 = em.createQuery("Delete FROM Guest Where ID =" + id);
+    	Query q1 = em.createQuery("Delete FROM Money Where ID =" + id);
     	q1.executeUpdate();
     	em.getTransaction().commit();        
     }
@@ -179,7 +179,7 @@ public class CJPA
 		return currDatabase;
 	}
 	
-	public void addMoney(int sum, String date)
+	public void addMoney(double sum, String date)
     {
     	if(em != null)
     	{

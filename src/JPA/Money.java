@@ -21,7 +21,7 @@ public class Money
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
-	private int moneySum;
+	private double moneySum;
 	private String date;
 	
 	public Money()
@@ -29,7 +29,7 @@ public class Money
 		
 	}
 	
-	public Money(int sum, String date)
+	public Money(double sum, String date)
 	{
 		this.moneySum = sum;
 		this.date = date;
@@ -39,7 +39,7 @@ public class Money
 	{
 		String[] data = new String[3];
 		data[0] = Integer.toString(ID);
-		data[1] = Integer.toString(moneySum);
+		data[1] = Double.toString(moneySum); 
 		data[2] = date;
 		return data;
 	}
@@ -49,7 +49,7 @@ public class Money
 		return ID;
 	}
 
-	public int getMoneySum() 
+	public double getMoneySum() 
 	{
 		return moneySum;
 	}
