@@ -33,13 +33,13 @@ import Utils.Hotel;
  * */
 
 @SuppressWarnings("serial")
-public class BookingFormular extends JFrame 
+public class Counter extends JFrame 
 {
     private JButton button1;
     private JButton button2;
     private JPanel contentPane;
     private JLabel[] label;
-    private String[] labelTexts = {"Name", "Surrname", "Email", "Bed count:", "From", "To"};
+    private String[] labelTexts = {"Bank accout", "Paypal", "Depths:", "Owns:"};
     private JMenuBar menuBar;
     private JMenu file;
     private JMenu tools;
@@ -59,7 +59,7 @@ public class BookingFormular extends JFrame
     private JTextField[] textfield;
     
     //pridat menu na obsluhovani databaze, zjistovani volnych pokoju, ukladani do databaze, moznost zadani delku pobytu, dynamicky pridavat ovladaci prvky
-    public BookingFormular(String nazevOkna)
+    public Counter(String nazevOkna)
     {
         this.setTitle(nazevOkna);
         this.setSize(400,300);
