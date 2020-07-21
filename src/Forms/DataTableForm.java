@@ -26,9 +26,10 @@ import JPA.Guest;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
+ * Last Edit: 21.07.2020
  * Created By: Riyufuchi
  * 
- * */
+ */
 
 
 @SuppressWarnings("serial")
@@ -36,29 +37,24 @@ public class DataTableForm extends JFrame
 {
 	private JLabel[] label;
 	private String[] labelTexts = {"ID", "Name", "Surrname", "Email", "Bed count:", "From", "To"};
-	private Font f;
+	private String inputFormName;
+	private Font mainFont;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
 	private JMenuBar menuBar;
     private JMenu file;
     private GridBagConstraints gbc;
-    private JTextField[] ID;
-    private JTextField[] Name;
-    private JTextField[] Surrname;
-    private JTextField[] Email;
-    private JTextField[] BedsInRoom;
-    private JTextField[] From;
-    private JTextField[] To;
+    private JTextField[][] textfield;
     
-    public DataTableForm()
+    public DataTableForm(String inputFormName)
     {
+    	this.inputFormName = inputFormName;
     	this.setTitle("Table" + " - " + CJPA.getCJPA().getCurrDatabaseName());
         this.setSize(400,300);
         this.setMinimumSize(new Dimension(400, 300));
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        //his.setResizable(false);
-        f = new Font("Dialog.plain", Font.BOLD, 14);
+        mainFont = new Font("Dialog.plain", Font.BOLD, 14);
         contentPane = new JPanel(null);
         contentPane.setBackground(new Color(192,192,192));
         contentPane.setLayout(new GridBagLayout());
@@ -83,12 +79,14 @@ public class DataTableForm extends JFrame
     	{
             public void actionPerformed(ActionEvent evt) 
             {
+            	/*
             	int[] id = new int[ID.length];
             	for(int i = 0; i < ID.length; i++)
             	{
             		id[i] = Integer.parseInt(ID[i].getText());
             	}
             	Operator op = new Operator("Vyberte ID", id);
+            	*/
             }
         });
         menuItem2.addActionListener(new ActionListener() 
@@ -106,7 +104,7 @@ public class DataTableForm extends JFrame
     
     private void prekresli()
     {
-    	DataTableForm dtf = new DataTableForm();
+    	DataTableForm dtf = new DataTableForm(inputFormName);
     	this.dispose();
     }
     
@@ -142,7 +140,7 @@ public class DataTableForm extends JFrame
     	for(int i = 0; i < labelTexts.length; i++)
     	{
     		label[i] = new JLabel();
-    		label[i].setFont(f);
+    		label[i].setFont(mainFont);
     		label[i].setText(labelTexts[i]);
     	}
     }
@@ -163,11 +161,11 @@ public class DataTableForm extends JFrame
     		ID[i] = new JTextField();
     		ID[i].setEnabled(false);
     		ID[i].setText(Integer.toString(((Guest)guests.get(i)).getID()));
-    		ID[i].setFont(f);
+    		ID[i].setFont(mainFont);
     		Name[i] = new JTextField();
     		Name[i].setEnabled(false);
     		Name[i].setText(((Guest)guests.get(i)).getName());
-    		Name[i].setFont(f);
+    		Name[i].setFont(mainFont);
     		Surrname[i] = new JTextField();
     		Surrname[i].setEnabled(false);
     		Surrname[i].setText(((Guest)guests.get(i)).getSurrname());
@@ -179,15 +177,15 @@ public class DataTableForm extends JFrame
     		BedsInRoom[i] = new JTextField();
     		BedsInRoom[i].setEnabled(false);
     		BedsInRoom[i].setText(Integer.toString(((Guest)guests.get(i)).getBedsInRoom()));
-    		BedsInRoom[i].setFont(f);
+    		BedsInRoom[i].setFont(mainFont);
     		From[i] = new JTextField();
     		From[i].setEnabled(false);
     		From[i].setText(((Guest)guests.get(i)).getDatumPrijezdu());
-    		From[i].setFont(f);
+    		From[i].setFont(mainFont);
     		To[i] = new JTextField();
             To[i].setEnabled(false);
             To[i].setText(((Guest)guests.get(i)).getDatumOdjezdu());
-            To[i].setFont(f);
+            To[i].setFont(mainFont);
     	}
     }
     

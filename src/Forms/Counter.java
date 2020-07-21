@@ -5,23 +5,16 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import JPA.CJPA;
-import Utils.Hotel;
 
 /*
  * Copyright Header
@@ -41,7 +34,6 @@ public class Counter extends JFrame
     private JPanel contentPane;
     private JLabel[] label;
     private String[] labelTexts = {"Bank accout", "Paypal", "Depths:", "Owns:"};
-    private JMenuBar menuBar;
     private ErrorWindow ew;
     private DataTableForm dtf;
     private GridBagConstraints gbc;
