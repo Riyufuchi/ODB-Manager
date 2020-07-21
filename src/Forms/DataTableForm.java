@@ -38,7 +38,7 @@ public class DataTableForm extends JFrame
 	private JLabel[] label;
 	private String[] labelTexts = {"ID", "Name", "Surrname", "Email", "Bed count:", "From", "To"};
 	private String inputFormName;
-	
+	private CJPA odb;
 	private Font mainFont;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
@@ -50,12 +50,22 @@ public class DataTableForm extends JFrame
     public DataTableForm(String inputFormName)
     {
     	this.inputFormName = inputFormName;
-    	this.setTitle("Table" + " - " + CJPA.getCJPA().getCurrDatabaseName());
+    	switch(inputFormName)
+    	{
+	    	case "Hotel": hotel(); break;
+	    	case "Money": money(); break;
+    	}
         this.setSize(400,300);
         this.setMinimumSize(new Dimension(400, 300));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        mainFont = new Font("Dialog.plain", Font.BOLD, 14);
+        this.pack();
+        this.setVisible(true);
+    }
+    
+    private void setUp()
+    {
+    	mainFont = new Font("Dialog.plain", Font.BOLD, 14);
         contentPane = new JPanel(null);
         contentPane.setBackground(new Color(192,192,192));
         contentPane.setLayout(new GridBagLayout());
@@ -66,8 +76,47 @@ public class DataTableForm extends JFrame
         scrollPane = new JScrollPane(contentPane);
         this.setJMenuBar(menuBar);
         this.add(scrollPane);
-        this.pack();
-        this.setVisible(true);
+    }
+    
+    private void hotel()
+    {
+    	connectDatabase("hotelDatabse.odb");
+    }
+    
+    private void money()
+    {
+    	connectDatabase("Database/money.odb");
+    }
+    
+    private void connectDatabase()
+    {
+    	odb = CJPA.getCJPA();
+    	odb.configFile();
+    	if(!odb.getCurrDatabaseName().equals("null"))
+    	{
+    		odb.connectToDB(odb.getCurrDatabaseName());
+    		this.setTitle("Table" + " - " + odb.getCurrDatabaseName());
+    		setUp();
+    	}
+    	else
+    	{
+    		this.setTitle("No database is connected, please connect database.");
+    	}
+    }
+    
+    private void connectDatabase(String databaseName)
+    {
+    	odb = CJPA.getCJPA();
+    	if(!databaseName.equals("null"))
+    	{
+    		odb.connectToDB(databaseName);
+    		this.setTitle("Table" + " - " + odb.getCurrDatabaseName());
+    		setUp();
+    	}
+    	else
+    	{
+    		this.setTitle("Error, databse wan't connected, please check path/datbaseName and connect database.");
+    	}
     }
     
     public void generujMenu()
@@ -145,7 +194,7 @@ public class DataTableForm extends JFrame
     
     private void setUpTextfield()
     {
-    	List guests1 = CJPA.getCJPA().getList("SELECT c FROM Guests c");
+    	List guests1 = CJPA.getCJPA().getList("SELECT c FROM Guest c");
     	List data = CJPA.getCJPA().getList("SELECT c FROM Guest c");
     	textfield = new JTextField[data.size()][labelTexts.length];
     	String[] listData;

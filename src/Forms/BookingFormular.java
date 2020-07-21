@@ -116,8 +116,12 @@ public class BookingFormular extends JFrame
     	if(!hotelDB.getCurrDatabaseName().equals("null"))
     	{
     		hotelDB.connectToDB(hotelDB.getCurrDatabaseName());
+    		this.setTitle(hotelDB.getCurrDatabaseName());
     	}
-    	this.setTitle(hotelDB.getCurrDatabaseName());
+    	else
+    	{
+    		this.setTitle("No database is connected");
+    	}
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -347,7 +351,7 @@ public class BookingFormular extends JFrame
     	{
             public void actionPerformed(ActionEvent evt) 
             {
-            	dtf = new DataTableForm();
+            	dtf = new DataTableForm("");
             }
         });
     	menuItem[4].addActionListener(new ActionListener() 
