@@ -1,6 +1,5 @@
 package Utils;
 
-import Forms.BookingFormular;
 import Forms.DataTableForm;
 
 /*
@@ -17,7 +16,7 @@ public class Main
 {
 	public static void main(String[] args) 
 	{
-		new DataTableForm("Counter");
+		new DataTableForm("Neutral");
 		//new BookingFormular("Hotel");
 	}
 }

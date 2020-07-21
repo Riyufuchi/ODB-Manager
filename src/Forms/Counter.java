@@ -33,22 +33,20 @@ public class Counter extends JFrame
     private JButton button2;
     private JPanel contentPane;
     private JLabel[] label;
-    private String[] labelTexts = {"Bank accout", "Paypal", "Depths:", "Owns:"};
+    private String[] labelTexts = {"Bank accout:", "Paypal:", "Cash:", "Depths:", "Owns:"};
     private ErrorWindow ew;
-    private DataTableForm dtf;
     private GridBagConstraints gbc;
     private DataConnectorForm dcf;
     private DataHolder data;
     private boolean saveToDB;
     private Border borderTextfield;
-    private Border borderCombobox;
     private CJPA odb;
     private JTextField[] textfield;
     
     //pridat menu na obsluhovani databaze, zjistovani volnych pokoju, ukladani do databaze, moznost zadani delku pobytu, dynamicky pridavat ovladaci prvky
-    public Counter(String nazevOkna)
+    public Counter()
     {
-        this.setTitle(nazevOkna);
+        this.setTitle("Counter");
         this.setSize(400,300);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);

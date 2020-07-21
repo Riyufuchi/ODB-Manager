@@ -12,14 +12,13 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import JPA.CJPA;
 import JPA.Guest;
+import Utils.JMenuAutoCreator;
 
 /*
  * Copyright Header
@@ -31,18 +30,19 @@ import JPA.Guest;
  * 
  */
 
-
 @SuppressWarnings("serial")
 public class DataTableForm extends JFrame
 {
 	private JLabel[] label;
-	private String[] labelTexts = {"ID", "Name", "Surrname", "Email", "Bed count:", "From", "To"};
+	//private String[] labelTexts = {"ID", "Name", "Surrname", "Email", "Bed count:", "From", "To"};
+	private String[] labelTexts = {"ID", "Money", "Date"};
 	private String inputFormName;
+	private String getQuery;
+	private JMenuAutoCreator mac;
 	private CJPA odb;
 	private Font mainFont;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
-	private JMenuBar menuBar;
     private JMenu file;
     private GridBagConstraints gbc;
     private JTextField[][] textfield;
@@ -52,6 +52,7 @@ public class DataTableForm extends JFrame
     	this.inputFormName = inputFormName;
     	switch(inputFormName)
     	{
+    		case "Neutral": neutral(); break;
 	    	case "Hotel": hotel(); break;
 	    	case "Money": money(); break;
     	}
@@ -74,17 +75,24 @@ public class DataTableForm extends JFrame
         nastavitOvladaciPrvky();
         contentPane.revalidate();
         scrollPane = new JScrollPane(contentPane);
-        this.setJMenuBar(menuBar);
         this.add(scrollPane);
+    }
+    
+    private void neutral()
+    {
+    	getQuery = "SELECT c FROM Guest c";
+    	connectDatabase();
     }
     
     private void hotel()
     {
+    	getQuery = "SELECT c FROM Guest c";
     	connectDatabase("hotelDatabse.odb");
     }
     
     private void money()
     {
+    	getQuery = "SELECT c FROM Money c";
     	connectDatabase("Database/money.odb");
     }
     
@@ -121,35 +129,43 @@ public class DataTableForm extends JFrame
     
     public void generujMenu()
     {
-        menuBar = new JMenuBar();
-        file = new JMenu("Operace");
-        JMenuItem menuItem = new JMenuItem("Odstranit zaznam");
-        JMenuItem menuItem2 = new JMenuItem("Refresh");
-        menuItem.addActionListener(new ActionListener() 
+    	String[] menu = {"Database", "Operations", "Help"};
+    	String[] menuItems = {"Create", "Connect", "Exit", "", "Add", "Delete", "Refresh", "", "About"};
+    	mac = new JMenuAutoCreator(menu, menuItems);
+    	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
-            public void actionPerformed(ActionEvent evt) 
-            {
-            	/*
-            	int[] id = new int[ID.length];
-            	for(int i = 0; i < ID.length; i++)
-            	{
-            		id[i] = Integer.parseInt(ID[i].getText());
-            	}
-            	Operator op = new Operator("Vyberte ID", id);
-            	*/
-            }
-        });
-        menuItem2.addActionListener(new ActionListener() 
-    	{
-            public void actionPerformed(ActionEvent evt) 
-            {
-            	nastavitOvladaciPrvky();
-            	prekresli();
-            }
-        });
-        file.add(menuItem);
-        file.add(menuItem2);
-        menuBar.add(file);
+    		switch(mac.getMenuItem()[i].getName())
+    		{
+    			case "Add": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	new Counter();
+    		            }
+    		        });
+    			break;
+    			case "Create": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	new DataConnectorForm("Create Database", false);
+    		            }
+    		        });
+    			break;
+    			case "Connect": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	new DataConnectorForm("Connect Database", true);
+    		            }
+    		        });
+    			break;
+    		}
+    	}
+    	this.setJMenuBar(mac.getJMenuBar());
     }
     
     private void prekresli()
@@ -160,11 +176,6 @@ public class DataTableForm extends JFrame
     
     private void nastavitOvladaciPrvky()
     {
-    	/*
-    	contentPane = new JPanel(null);
-        contentPane.setBackground(new Color(192,192,192));
-        contentPane.setLayout(new GridBagLayout());
-        */
         gbc = new GridBagConstraints();
         setUpLabels();
         for(int i = 0; i < labelTexts.length; i++)
@@ -194,8 +205,8 @@ public class DataTableForm extends JFrame
     
     private void setUpTextfield()
     {
-    	List guests1 = CJPA.getCJPA().getList("SELECT c FROM Guest c");
-    	List data = CJPA.getCJPA().getList("SELECT c FROM Guest c");
+    	List guests1 = CJPA.getCJPA().getList(getQuery);
+    	List data = CJPA.getCJPA().getList(getQuery);
     	textfield = new JTextField[data.size()][labelTexts.length];
     	String[] listData;
     	for(int x = 0; x < textfield.length; x++)

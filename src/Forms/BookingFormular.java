@@ -28,9 +28,10 @@ import Utils.Hotel;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
+ * Last Edit: 21.07.2020
  * Created By: Riyufuchi
  * 
- * */
+ */
 
 @SuppressWarnings("serial")
 public class BookingFormular extends JFrame 
