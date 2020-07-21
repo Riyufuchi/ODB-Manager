@@ -178,6 +178,20 @@ public class DataTableForm extends JFrame
     		            }
     		        });
     			break;
+    			case "Delete": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	int[] ID = new int[textfield.length];
+    		            	for(int i = 0; i < ID.length; i++)
+    		            	{
+    		            		ID[i] = Integer.parseInt(textfield[i][0].getText());
+    		            	}
+    		            	new Operator("Delete", ID);
+    		            }
+    		        });
+    			break;
     			case "Refresh": 
     				mac.getMenuItem()[i].addActionListener(new ActionListener() 
     		    	{
@@ -245,7 +259,6 @@ public class DataTableForm extends JFrame
     		listData = ((Money)data.get(x)).getDataArray();
 	        for(int i = 0; i < textfield[0].length; i++)
 		    {
-	        	System.out.print(listData[i]);
 	        	textfield[x][i] = new JTextField();
 	        	textfield[x][i].setEnabled(false);
 	        	textfield[x][i].setText(listData[i]);

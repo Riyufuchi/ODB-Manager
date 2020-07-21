@@ -30,7 +30,7 @@ public class Operator extends JFrame
     private JButton button2;
     private JPanel contentPane;
     private JLabel[] label;
-    private String[] labelTexts = {"ID:"};
+    private String[] labelTexts = {"Item ID:"};
     private GridBagConstraints gbc;
     private JComboBox comboBox;
     
