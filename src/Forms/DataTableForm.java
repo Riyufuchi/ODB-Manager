@@ -42,9 +42,9 @@ public class DataTableForm extends JFrame
 	private JMenuAutoCreator mac;
 	private CJPA odb;
 	private Font mainFont;
+	private List data;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
-    private JMenu file;
     private GridBagConstraints gbc;
     private JTextField[][] textfield;
     
@@ -73,7 +73,7 @@ public class DataTableForm extends JFrame
         contentPane.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         generujMenu();
-        nastavitOvladaciPrvky();
+        //nastavitOvladaciPrvky();
         contentPane.revalidate();
         scrollPane = new JScrollPane(contentPane);
         this.add(scrollPane);
@@ -136,7 +136,7 @@ public class DataTableForm extends JFrame
     public void generujMenu()
     {
     	String[] menu = {"Database", "Operations", "Help"};
-    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh", "", "About"};
+    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh/Load", "", "About"};
     	mac = new JMenuAutoCreator(menu, menuItems);
     	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
@@ -192,19 +192,13 @@ public class DataTableForm extends JFrame
     		            }
     		        });
     			break;
-    			case "Refresh": 
+    			case "Refresh/Load": 
     				mac.getMenuItem()[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            	setUpTextfield();
-    		                for(int x = 0; x < textfield.length; x++)
-    		                {
-    		        	        for(int i = 0; i < textfield[0].length; i++)
-    		        		    {
-    		        	        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
-    		        		    }
-    		                }
+    		            	nastavitOvladaciPrvky();
+    		            	prekresli();
     		            }
     		        });
     			break;
@@ -215,8 +209,8 @@ public class DataTableForm extends JFrame
     
     private void prekresli()
     {
-    	DataTableForm dtf = new DataTableForm(inputFormName);
-    	this.dispose();
+    	this.pack();
+    	this.repaint();
     }
     
     public void nastavitOvladaciPrvky()
@@ -250,8 +244,7 @@ public class DataTableForm extends JFrame
     
     private void setUpTextfield()
     {
-    	List guests1 = odb.getList(getQuery);
-    	List data = odb.getList(getQuery);
+    	data = odb.getList(getQuery);
     	textfield = new JTextField[data.size()][labelTexts.length];
     	String[] listData;
     	for(int x = 0; x < textfield.length; x++)

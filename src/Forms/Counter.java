@@ -21,7 +21,7 @@ import JPA.CJPA;
  * 
  * Projetct: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 21.07.2020
+ * Last Edit: 23.07.2020
  * Created By: Riyufuchi
  * 
  */
@@ -35,10 +35,8 @@ public class Counter extends JFrame
     private DataTableForm dtf;
     private JLabel[] label;
     private String[] labelTexts = {"Bank accout:", "Paypal:", "Cash:", "Depths:", "Owns:", "Date:"};
-    private ErrorWindow ew;
     private GridBagConstraints gbc;
     private boolean justAdd;
-    private DataHolder data;
     private boolean saveToDB;
     private Border borderTextfield;
     private CJPA odb;
@@ -61,7 +59,6 @@ public class Counter extends JFrame
     
     private void setUp()
     {
-    	data = new DataHolder();
     	pripojitDatabazi();
     	nastavitOvladaciPrvky();
         vytvoritUdalosti();
@@ -71,7 +68,6 @@ public class Counter extends JFrame
     private void pripojitDatabazi()
     {
     	odb = CJPA.getCJPA();
-    	//odb.configFile();
     	if(!odb.getCurrDatabaseName().equals("null"))
     	{
     		odb.connectToDB(odb.getCurrDatabaseName());
@@ -103,6 +99,7 @@ public class Counter extends JFrame
         	textfield[0].setName("Sum");
         	textfield[1] = new JTextField();
         	textfield[1].setName("Date");
+        	borderTextfield = textfield[0].getBorder(); 
         	label = new JLabel[2];
         	label[0] = new JLabel("Sum:");
         	label[1] = new JLabel("Date:");
@@ -127,6 +124,7 @@ public class Counter extends JFrame
 	        	textfield[i] = new JTextField();
 	        	textfield[i].setName(labelTexts[i]);
 	        }
+	        borderTextfield = textfield[0].getBorder(); 
 	        gbc = new GridBagConstraints();
 	        for(int i = 0; i < labelTexts.length; i++)
 	        {
@@ -156,17 +154,38 @@ public class Counter extends JFrame
     	}
     }
    
-    private String basicCheck(String text, int id, JComponent control)
+    private String check(String text, int id, JComponent control)
     {
     	if(!text.equals(""))
     	{
-    		return text;
+    		if(text.contains(","))
+    		{
+    			text.replace(",", ".");
+    		}
+    		String number = "";
+    		boolean dot = false;
+    		for(int i = 0; i < text.length(); i++)
+        	{
+        		if(Character.isDigit(text.charAt(i)))
+        		{
+        			number = number + text.charAt(i);
+        		}	
+        		if(text.charAt(i) == '.')
+        		{
+        			if(!dot)
+        			{
+        				number = number + text.charAt(i);
+        				dot = true;
+        			}
+        		}
+    		}
+    		return number;
     	}
     	else
     	{
-    		ew = new ErrorWindow("Chybnì zadaná hodnota", "V poli: " + textfield[id].getName() + " chybý údaje");
+    		new ErrorWindow("Chybnì zadaná hodnota", "Error at: " + textfield[id].getName() + " Invalid or Missing value");
     		makeRedBorder(control);
-    		return "Chybìjcí údaj - doplnit";
+    		return "Missing or Invalid value";
     	}
     }
     
@@ -204,19 +223,19 @@ public class Counter extends JFrame
     	{
     		for(int i = 0; i < textfield.length; i++)
 	    	{
-	    		basicCheck(textfield[i].getText(), i, textfield[i]);
+	    		check(textfield[i].getText(), i, textfield[i]);
 	    	}
     		if(saveToDB)
 	    	{
 	    		odb.addMoney(Double.parseDouble(textfield[0].getText()), textfield[1].getText());
-	    		ew = new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
+	    		new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
 	    	}
     	}
     	else
     	{
 	    	for(int i = 0; i < textfield.length; i++)
 	    	{
-	    		basicCheck(textfield[i].getText(), i, textfield[i]);
+	    		check(textfield[i].getText(), i, textfield[i]);
 	    	}
 	    	double money = 0;
 	    	for(int i = 0; i < textfield.length - 1; i++)
@@ -226,7 +245,7 @@ public class Counter extends JFrame
 	    	if(saveToDB)
 	    	{
 	    		odb.addMoney(money, textfield[textfield.length-1].getText());
-	    		ew = new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
+	    		new ErrorWindow("Zapis", "Uspesne zapsano do databaze.");
 	    	}
     	}
     	dtf.nastavitOvladaciPrvky();
@@ -242,7 +261,6 @@ public class Counter extends JFrame
             	checkDataPersistance();
             }
         });
-    	//upozorneni setVisible(false); schova aplikaci a da se vypnout ze spravce uloh -> podrobnosti javaw.exe
     	button2.addActionListener(new ActionListener() 
     	{
             public void actionPerformed(ActionEvent evt) 
