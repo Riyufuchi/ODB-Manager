@@ -44,6 +44,16 @@ public class Money
 		return data;
 	}
 	
+	public void setMoneySum(Double moneySum) 
+	{
+		this.moneySum = moneySum;
+	}
+
+	public void setDate(String date) 
+	{
+		this.date = date;
+	}
+	
 	public int getID() 
 	{
 		return ID;

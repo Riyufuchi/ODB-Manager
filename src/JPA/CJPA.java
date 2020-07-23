@@ -117,6 +117,15 @@ public class CJPA
         return null;
     }
     
+    public void editData(int id, double sum, String date)
+    {
+    	Money m = em.find(Money.class, id);
+    	em.getTransaction().begin();       
+    	m.setMoneySum(sum);
+    	m.setDate(date);
+    	em.getTransaction().commit();        
+    }
+    
     public void delateData(int id)
     {
     	em.getTransaction().begin();       

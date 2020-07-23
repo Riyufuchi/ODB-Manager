@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -147,6 +146,8 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
+    		            	nastavitOvladaciPrvky();
+    		            	prekresli();
     		            	new Counter(false, getDTF());
     		            }
     		        });
@@ -156,7 +157,20 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
+    		            	nastavitOvladaciPrvky();
+    		            	prekresli();
     		            	new Counter(true, getDTF());
+    		            }
+    		        });
+    			break;
+    			case "Edit": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	nastavitOvladaciPrvky();
+    		            	prekresli();
+    		            	new Edit(getDTF());
     		            }
     		        });
     			break;
@@ -165,6 +179,8 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
+    		            	nastavitOvladaciPrvky();
+    		            	prekresli();
     		            	new DataConnectorForm("Create Database", false);
     		            }
     		        });
@@ -174,6 +190,8 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
+    		            	nastavitOvladaciPrvky();
+    		            	prekresli();
     		            	new DataConnectorForm("Connect Database", true);
     		            }
     		        });
@@ -183,6 +201,8 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
+    		            	nastavitOvladaciPrvky();
+    		            	prekresli();
     		            	int[] ID = new int[textfield.length];
     		            	for(int i = 0; i < ID.length; i++)
     		            	{
@@ -258,6 +278,11 @@ public class DataTableForm extends JFrame
 	        	textfield[x][i].setFont(mainFont);
 		    }
         }
+    }
+    
+    public List getData()
+    {
+    	return data;
     }
     
 	private GridBagConstraints getGBC(int x, int y)
