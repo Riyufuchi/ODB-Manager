@@ -154,7 +154,7 @@ public class Counter extends JFrame
     	}
     }
    
-    private String check(String text, int id, JComponent control)
+    private void check(String text, int id, JComponent control)
     {
     	if(!text.equals(""))
     	{
@@ -166,26 +166,25 @@ public class Counter extends JFrame
     		boolean dot = false;
     		for(int i = 0; i < text.length(); i++)
         	{
-        		if(Character.isDigit(text.charAt(i)))
-        		{
-        			number = number + text.charAt(i);
-        		}	
-        		if(text.charAt(i) == '.')
-        		{
-        			if(!dot)
-        			{
-        				number = number + text.charAt(i);
-        				dot = true;
-        			}
-        		}
+    			if(Character.isDigit(text.charAt(i)))
+	        	{
+    				number = number + text.charAt(i);
+	        	}	
+	        	if(!dot)
+	    		{
+	        		if(text.charAt(i) == '.')
+		        	{
+	        			number = number + text.charAt(i);
+		        		dot = true;
+		        	}
+	    		}
     		}
-    		return number;
+    		textfield[id].setText(number);
     	}
     	else
     	{
     		new ErrorWindow("Chybnì zadaná hodnota", "Error at: " + textfield[id].getName() + " Invalid or Missing value");
     		makeRedBorder(control);
-    		return "Missing or Invalid value";
     	}
     }
     
