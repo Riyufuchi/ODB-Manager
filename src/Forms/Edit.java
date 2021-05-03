@@ -130,7 +130,6 @@ public class Edit extends JFrame
     	if(!text.equals(""))
     	{
     		String number = "";
-    		text.replaceAll(",", ".");
     		for(int i = 0; i < text.length(); i++)
         	{
     			if(Character.isDigit(text.charAt(i)))
