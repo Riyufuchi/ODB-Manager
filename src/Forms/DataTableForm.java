@@ -51,7 +51,6 @@ public class DataTableForm extends JFrame
     	switch(inputFormName)
     	{
     		case "Neutral": neutral(); break;
-	    	case "Hotel": hotel(); break;
 	    	case "Money": money(); break;
     	}
         this.setSize(400,300);
@@ -82,12 +81,6 @@ public class DataTableForm extends JFrame
     	connectDatabase();
     }
     
-    private void hotel()
-    {
-    	getQuery = "SELECT c FROM Guest c";
-    	connectDatabase("hotelDatabse.odb");
-    }
-    
     private void money()
     {
     	getQuery = "SELECT c FROM Money c";
@@ -107,6 +100,7 @@ public class DataTableForm extends JFrame
     	else
     	{
     		this.setTitle("No database is connected, please connect database.");
+    		generujMenu();
     	}
     }
     
@@ -133,8 +127,8 @@ public class DataTableForm extends JFrame
     
     public void generujMenu()
     {
-    	String[] menu = {"Database", "Operations", "Help"};
-    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh/Load", "", "About"};
+    	String[] menu = {"Database", "Operations", "Tools", "Help"};
+    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
     	mac = new JMenuAutoCreator(menu, menuItems);
     	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
@@ -177,9 +171,7 @@ public class DataTableForm extends JFrame
     				mac.getMenuItem()[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
-    		            {
-    		            	nastavitOvladaciPrvky();
-    		            	prekresli();
+    		            {		     
     		            	new DataConnectorForm("Create Database", false);
     		            }
     		        });
@@ -188,9 +180,7 @@ public class DataTableForm extends JFrame
     				mac.getMenuItem()[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
-    		            {
-    		            	nastavitOvladaciPrvky();
-    		            	prekresli();
+    		            {		 
     		            	new DataConnectorForm("Connect Database", true);
     		            }
     		        });
@@ -218,6 +208,17 @@ public class DataTableForm extends JFrame
     		            {
     		            	nastavitOvladaciPrvky();
     		            	prekresli();
+    		            }
+    		        });
+    			break;
+    			case "About": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	new ErrorWindow("About", "This is ODB database manager.\n"
+    		            			+ "Created by Riyufuchi.\n"
+    		            			+ "Free libs under OpenSource lincention are used (I thnink), however my code is not under OpenSource licention.");
     		            }
     		        });
     			break;

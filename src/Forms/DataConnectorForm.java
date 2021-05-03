@@ -21,7 +21,7 @@ import JPA.CJPA;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 21.07.2020
+ * Last Edit: 03.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -34,7 +34,7 @@ public class DataConnectorForm extends JFrame implements KeyListener
     private JPanel contentPane;
     private JLabel[] label;
     private String[] labelTexts = {"Akce:", "Nazev natabaze:"};
-    private CJPA hotelDB;
+    private CJPA conectedDB;
     private GridBagConstraints gbc;
     private JComboBox comboBox;
     private JTextField textfield;
@@ -56,7 +56,7 @@ public class DataConnectorForm extends JFrame implements KeyListener
     
     private void setUp()
     {
-    	hotelDB = CJPA.getCJPA();
+    	conectedDB = CJPA.getCJPA();
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
