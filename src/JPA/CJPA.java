@@ -1,26 +1,25 @@
 package JPA;
 
-import java.util.List;
-import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Scanner;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-import Forms.DataHolder;
 
 /*
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 21.07.2020
+ * Last Edit: 03.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -193,14 +192,6 @@ public class CJPA
     	if(em != null)
     	{
     		em.persist(new Money(sum, date));
-    	}
-    }
-    
-    public void addGuest(DataHolder data)
-    {
-    	if(em != null)
-    	{
-    		em.persist(new Guest(data.getName(), data.getSurrname(), data.getEmail(), data.getBedsInRoom(), data.getDatumPrijezdu(), data.getDatumOdjezdu()));
     	}
     }
 }

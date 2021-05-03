@@ -15,8 +15,7 @@ import javax.swing.JTextArea;
  * Created On: 13.07.2020
  * Created By: Riyufuchi
  * 
- * */
-
+ */
 
 @SuppressWarnings("serial")
 public class ErrorWindow extends JFrame  

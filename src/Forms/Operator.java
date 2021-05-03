@@ -22,7 +22,6 @@ import JPA.CJPA;
  * 
  * */
 
-
 @SuppressWarnings("serial")
 public class Operator extends JFrame
 {

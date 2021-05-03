@@ -16,7 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import JPA.CJPA;
-import JPA.Guest;
 import JPA.Money;
 import Utils.JMenuAutoCreator;
 
@@ -25,7 +24,7 @@ import Utils.JMenuAutoCreator;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 21.07.2020
+ * Last Edit: 03.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -34,7 +33,6 @@ import Utils.JMenuAutoCreator;
 public class DataTableForm extends JFrame
 {
 	private JLabel[] label;
-	//private String[] labelTexts = {"ID", "Name", "Surrname", "Email", "Bed count:", "From", "To"};
 	private String[] labelTexts = {"ID", "Money", "Date"};
 	private String inputFormName;
 	private String getQuery;
@@ -123,7 +121,8 @@ public class DataTableForm extends JFrame
     	}
     	else
     	{
-    		this.setTitle("Error, databse wan't connected, please check path/datbaseName and connect database.");
+    		this.setTitle("Error, database wasn't connected, please check path/datbaseName and connect database.");
+    		generujMenu();
     	}
     }
     
