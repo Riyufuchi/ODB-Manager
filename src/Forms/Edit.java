@@ -125,31 +125,23 @@ public class Edit extends JFrame
     	}
     }
     
-    private void check(String text, int id, JComponent control)
+    private void checkFormat(String text, int id, JComponent control)
     {
     	if(!text.equals(""))
     	{
-    		if(text.contains(","))
-    		{
-    			text.replace(",", ".");
-    		}
     		String number = "";
-    		boolean dot = false;
+    		text.replaceAll(",", ".");
     		for(int i = 0; i < text.length(); i++)
         	{
     			if(Character.isDigit(text.charAt(i)))
 	        	{
     				number = number + text.charAt(i);
-	        	}	
-	        	if(!dot)
-	    		{
-	        		if(text.charAt(i) == '.')
-		        	{
-	        			number = number + text.charAt(i);
-		        		dot = true;
-		        	}
-	    		}
-    		}
+	        	}
+    			else if(text.charAt(i) == ',')
+		        {
+	        		number = number + '.';
+		        }
+	    	}
     		textfield[id].setText(number);
     	}
     	else
@@ -202,9 +194,9 @@ public class Edit extends JFrame
     {
     	for(int i = 0; i < textfield.length; i++)
 	    {
-    		if(i == 3)
+    		if(i == 0)
     		{
-    			check(textfield[i].getText(), i, textfield[i]);
+    			checkFormat(textfield[i].getText(), i, textfield[i]);
     		}
     		else
     		{
