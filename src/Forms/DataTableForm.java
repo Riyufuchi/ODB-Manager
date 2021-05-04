@@ -34,12 +34,12 @@ public class DataTableForm extends JFrame
 {
 	private JLabel[] label;
 	private String[] labelTexts = {"ID", "Money", "Date"};
-	private String inputFormName;
+	//private String inputFormName;
 	private String getQuery;
 	private JMenuAutoCreator mac;
 	private CJPA odb;
 	private Font mainFont;
-	private List data;
+	private List<?> data;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
     private GridBagConstraints gbc;
@@ -47,7 +47,7 @@ public class DataTableForm extends JFrame
     
     public DataTableForm(String inputFormName)
     {
-    	this.inputFormName = inputFormName;
+    	//this.inputFormName = inputFormName;
     	switch(inputFormName)
     	{
     		case "Neutral": neutral(); break;
@@ -104,6 +104,7 @@ public class DataTableForm extends JFrame
     	}
     }
     
+    /*
     private void connectDatabase(String databaseName)
     {
     	odb = CJPA.getCJPA();
@@ -118,6 +119,7 @@ public class DataTableForm extends JFrame
     		this.setTitle("Error, database wasn't connected, please check path/datbaseName and connect database.");
     	}
     }
+    */
     
     private DataTableForm getDTF()
     {
@@ -306,7 +308,7 @@ public class DataTableForm extends JFrame
         }
     }
     
-    public List getData()
+    public List<?> getData()
     {
     	return data;
     }

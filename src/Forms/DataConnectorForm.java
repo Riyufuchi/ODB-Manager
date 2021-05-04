@@ -34,7 +34,6 @@ public class DataConnectorForm extends JFrame implements KeyListener
     private JPanel contentPane;
     private JLabel[] label;
     private String[] labelTexts = {"Akce:", "Nazev natabaze:"};
-    private CJPA conectedDB;
     private GridBagConstraints gbc;
     private JComboBox<String> comboBox;
     private JTextField textfield;
@@ -46,17 +45,11 @@ public class DataConnectorForm extends JFrame implements KeyListener
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        setUp();
         nastavitOvladaciPrvky(allowConnection);
         vytvoritUdalosti();
         this.add(contentPane);
         this.pack();
         this.setVisible(true);
-    }
-    
-    private void setUp()
-    {
-    	conectedDB = CJPA.getCJPA();
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })

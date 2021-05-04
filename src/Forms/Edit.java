@@ -38,7 +38,7 @@ public class Edit extends JFrame
     private JLabel[] label;
     private String[] labelTexts = {"Item ID:", "Amout of money:", "Date:"};
     private DataTableForm dtf;
-    private JComboBox comboBox;
+    private JComboBox<String> comboBox;
     private JTextField[] textfield;
     private GridBagConstraints gbc;
     private boolean saveToDB;
