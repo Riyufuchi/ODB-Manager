@@ -13,14 +13,13 @@ import javax.swing.JPanel;
 
 import JPA.CJPA;
 
-/*
- * Copyright Header
- * 
+/* Copyright Header
+ *
  * Projetct: ODB Manager
  * Created On: 13.07.2020
+ * Last Edit: 04.05.2021
  * Created By: Riyufuchi
- * 
- * */
+ */
 
 @SuppressWarnings("serial")
 public class Operator extends JFrame
@@ -31,7 +30,7 @@ public class Operator extends JFrame
     private JLabel[] label;
     private String[] labelTexts = {"Item ID:"};
     private GridBagConstraints gbc;
-    private JComboBox comboBox;
+    private JComboBox<String> comboBox;
     
     public Operator(String nazevOkna, int[] ID)
     {

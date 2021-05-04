@@ -24,7 +24,7 @@ import Utils.JMenuAutoCreator;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 03.05.2021
+ * Last Edit: 04.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -116,7 +116,6 @@ public class DataTableForm extends JFrame
     	else
     	{
     		this.setTitle("Error, database wasn't connected, please check path/datbaseName and connect database.");
-    		generujMenu();
     	}
     }
     
@@ -219,6 +218,33 @@ public class DataTableForm extends JFrame
     		            	new ErrorWindow("About", "This is ODB database manager.\n"
     		            			+ "Created by Riyufuchi.\n"
     		            			+ "Free libs under OpenSource lincention are used (I thnink), however my code is not under OpenSource licention.");
+    		            }
+    		        });
+    			break;
+    			case "Exit": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	System.exit(0);
+    		            }
+    		        });
+    			break;
+    			case "Highest savings": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            
+    		            }
+    		        });
+    			break;
+    			case "Lowest savings": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            
     		            }
     		        });
     			break;

@@ -21,7 +21,7 @@ import JPA.CJPA;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 03.05.2021
+ * Last Edit: 04.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -36,7 +36,7 @@ public class DataConnectorForm extends JFrame implements KeyListener
     private String[] labelTexts = {"Akce:", "Nazev natabaze:"};
     private CJPA conectedDB;
     private GridBagConstraints gbc;
-    private JComboBox comboBox;
+    private JComboBox<String> comboBox;
     private JTextField textfield;
     
     public DataConnectorForm(String nazevOkna, boolean allowConnection)
@@ -163,13 +163,13 @@ public class DataConnectorForm extends JFrame implements KeyListener
             	{
             		CJPA.getCJPA().createDB(textfield.getText());
             		CJPA.getCJPA().writeToConfigFile(textfield.getText());
-            		ErrorWindow ew = new ErrorWindow("Vytvoreni databaze", "Databaze " + textfield.getText() + " byla uspesne vytvorena a pripojena.");
+            		new ErrorWindow("Vytvoreni databaze", "Databaze " + textfield.getText() + " byla uspesne vytvorena a pripojena.");
             	}
             	else
             	{
             		CJPA.getCJPA().connectToDB(textfield.getText());
             		CJPA.getCJPA().writeToConfigFile(textfield.getText());
-            		ErrorWindow ew = new ErrorWindow("Pripojeni databaze", "Databaze " + textfield.getText() + " byla uspesne pripojena.");
+            		new ErrorWindow("Pripojeni databaze", "Databaze " + textfield.getText() + " byla uspesne pripojena.");
             	}
             }
         });

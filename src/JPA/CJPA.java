@@ -14,12 +14,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import Forms.ErrorWindow;
+
 /*
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 03.05.2021
+ * Last Edit: 04.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -78,7 +80,7 @@ public class CJPA
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            new ErrorWindow("SQL exception", e.getMessage());
         }
     }
     
@@ -102,16 +104,16 @@ public class CJPA
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            new ErrorWindow("SQL exception", e.getMessage());
         }
         try 
         {
-            EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(name + ".odb");
+        	Persistence.createEntityManagerFactory(name + ".odb");
             return DriverManager.getConnection(name + ".odb");
         } 
         catch (SQLException e) 
         {
-            e.printStackTrace();
+            new ErrorWindow("SQL exception", e.getMessage());
         }
         return null;
     }
@@ -148,7 +150,7 @@ public class CJPA
 			} 
 			catch (Exception e) 
 			{
-				//System.out.println("Soubor neexistuje.");
+				new ErrorWindow("Config file error", e.getMessage());
 			}
 		}
 		else
@@ -160,12 +162,12 @@ public class CJPA
 			} 
 			catch (Exception e1) 
 			{
-				//System.out.println("Nepovedlo se zapsat do souboru nastaveni.");
+				new ErrorWindow("Config file error", e1.getMessage());
 			}
 		}
 	}
 	
-	public static void writeToConfigFile(String name)
+	public void writeToConfigFile(String name)
 	{
 		File f = new File("Settings.txt");
 		if(f.isFile()) 
@@ -177,7 +179,7 @@ public class CJPA
 			} 
 			catch (Exception e1) 
 			{
-				//System.out.println("Nepovedlo se zapsat do souboru nastaveni.");
+				new ErrorWindow("Config file error", "Writting into config file was unsucessful.\n" + e1.getMessage());
 			}
 		}
 	}
