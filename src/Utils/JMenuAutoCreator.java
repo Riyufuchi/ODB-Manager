@@ -16,17 +16,17 @@ import javax.swing.JMenuItem;
 
 public class JMenuAutoCreator 
 {
-	private int[] index; //index
+	private int[] index;
 	private JMenuBar menuBar;
-    private JMenu[] menu;
-    private JMenuItem[] menuItem;
-    
-    public JMenuAutoCreator(String[] menuLabels, String[] menuItemLabels)
-    {
-    	index = new int[menuLabels.length];
-    	layoutButtonIndex(JMenuItemsPerSection(menuItemLabels));
-        generateMenu(menuLabels, menuItemLabels);
-    }
+	private JMenu[] menu;
+	private JMenuItem[] menuItem;
+	
+	public JMenuAutoCreator(String[] menuLabels, String[] menuItemLabels)
+	{
+		index = new int[menuLabels.length];
+		layoutButtonIndex(JMenuItemsPerSection(menuItemLabels));
+		generateMenu(menuLabels, menuItemLabels);
+	}
     
 	private int[] JMenuItemsPerSection(String[] menuItemLabels)
 	{
@@ -66,31 +66,31 @@ public class JMenuAutoCreator
 	}
 	
 	private void generateMenu(String[] menuLabels, String[] menuItemLabels)
-    {
-        menuBar = new JMenuBar();
-        menu = new JMenu[menuLabels.length];
-        int i = 0;
-        int value = menuItemLabels.length;
-        for(i = 0; i < menuItemLabels.length; i++)
-        {
-        	if(menuItemLabels[i].equals(""))
-        	{
-        		value--;
-        	}
-        }
-        menuItem = new JMenuItem[value];
-        for(i = 0; i < menu.length; i++)
-        {
-        	menu[i] = new JMenu(menuLabels[i]);
-        }
-        value = 0;
-        for(i = 0; i < menuItemLabels.length; i++)
-        {
-        	if(!menuItemLabels[i].equals(""))
-        	{
-        		menuItem[value] = new JMenuItem(menuItemLabels[i]);
-        		menuItem[value].setName(menuItemLabels[i]);
-        		value++;
+	{
+		menuBar = new JMenuBar();
+		menu = new JMenu[menuLabels.length];
+		int i = 0;
+		int value = menuItemLabels.length;
+		for(i = 0; i < menuItemLabels.length; i++)
+		{
+			if(menuItemLabels[i].equals(""))
+			{
+				value--;
+			}
+		}
+		menuItem = new JMenuItem[value];
+		for(i = 0; i < menu.length; i++)
+		{
+			menu[i] = new JMenu(menuLabels[i]);
+		}
+		value = 0;
+		for(i = 0; i < menuItemLabels.length; i++)
+		{
+			if(!menuItemLabels[i].equals(""))
+			{
+				menuItem[value] = new JMenuItem(menuItemLabels[i]);
+				menuItem[value].setName(menuItemLabels[i]);
+				value++;
         	}
         	else
         	{
