@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -236,7 +237,9 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            
+    		            	nastavitOvladaciPrvky();	 
+    		            	highestSavings();
+    		            	prekresli();
     		            }
     		        });
     			break;
@@ -245,13 +248,51 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            
+    		            	nastavitOvladaciPrvky();
+    		            	lowestSavings();
+    		            	prekresli();
     		            }
     		        });
     			break;
     		}
     	}
     	this.setJMenuBar(mac.getJMenuBar());
+    }
+    
+    private void highestSavings()
+    {
+    	int index = 0;
+    	double value = 0;
+    	for(int i = 0; i < textfield.length; i++)
+    	{
+    		if((Double.parseDouble(textfield[i][1].getText())) > value)
+    		{
+    			index = i;
+    			value = Double.parseDouble(textfield[i][1].getText());
+    		}
+    	}
+    	for(int c = 0; c < 3; c++)
+    	{
+    		textfield[index][c].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+    	}
+    }
+    
+    private void lowestSavings()
+    {
+    	int index = 0;
+    	double value = Double.parseDouble(textfield[0][1].getText());
+    	for(int i = 0; i < textfield.length; i++)
+    	{
+    		if((Double.parseDouble(textfield[i][1].getText())) < value)
+    		{
+    			index = i;
+    			value = Double.parseDouble(textfield[i][1].getText());
+    		}
+    	}
+    	for(int c = 0; c < 3; c++)
+    	{
+    		textfield[index][c].setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
+    	}
     }
     
     private void prekresli()
@@ -276,6 +317,7 @@ public class DataTableForm extends JFrame
 	        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
 		    }
         }
+        
     }
     
     private void setUpLabels()
@@ -317,6 +359,6 @@ public class DataTableForm extends JFrame
     	gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = x;
         gbc.gridy = y;
-		return gbc;
+        return gbc;
     }
 }
