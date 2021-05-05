@@ -24,7 +24,7 @@ import Utils.JMenuAutoCreator;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 04.05.2021
+ * Last Edit: 05.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -69,7 +69,6 @@ public class DataTableForm extends JFrame
         contentPane.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         generujMenu();
-        //nastavitOvladaciPrvky();
         contentPane.revalidate();
         scrollPane = new JScrollPane(contentPane);
         this.add(scrollPane);

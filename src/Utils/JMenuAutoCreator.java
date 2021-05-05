@@ -91,45 +91,45 @@ public class JMenuAutoCreator
 				menuItem[value] = new JMenuItem(menuItemLabels[i]);
 				menuItem[value].setName(menuItemLabels[i]);
 				value++;
-        	}
-        	else
-        	{
-        		i++;
-        		menuItem[value] = new JMenuItem(menuItemLabels[i]);
-        		menuItem[value].setName(menuItemLabels[i]);
-        		value++;
-        	}
-        }
-        int i2 = 0;
-        for(int x = 0; x < menuLabels.length; x++)
-        {
-        	for(i = i2; i < index[x]; i++)
-            {
-        		if(x > 0)
-        		{
-        			menu[x].add(menuItem[i]);
-        		}
-        		else
-        		{
-	            	switch(i)
-	            	{
-	            		case 2: menu[x].addSeparator(); menu[x].add(menuItem[i]); break;
-	            		default: menu[x].add(menuItem[i]); break;
-	            	}
-        		}
-        		menuBar.add(menu[x]);
-            }
-        	i2 = i;
-        }
-    }
+			}
+			else
+			{
+				i++;
+				menuItem[value] = new JMenuItem(menuItemLabels[i]);
+				menuItem[value].setName(menuItemLabels[i]);
+				value++;
+			}
+		}
+		int i2 = 0;
+		for(int x = 0; x < menuLabels.length; x++)
+		{
+			for(i = i2; i < index[x]; i++)
+			{
+				if(x > 0)
+				{
+					menu[x].add(menuItem[i]);
+				}
+				else
+				{
+					switch(i)
+					{
+						case 2: menu[x].addSeparator(); menu[x].add(menuItem[i]); break;
+						default: menu[x].add(menuItem[i]); break;
+					}
+				}
+				menuBar.add(menu[x]);
+			}
+			i2 = i;
+		}
+	}
 	
 	public JMenuItem[] getMenuItem()
-    {
-    	return menuItem;
-    }
+	{
+		return menuItem;
+	}
 	
-    public JMenuBar getJMenuBar()
-    {
-    	return menuBar;
-    }
+	public JMenuBar getJMenuBar()
+	{
+		return menuBar;
+	}
 }
