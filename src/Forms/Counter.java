@@ -29,7 +29,7 @@ import JPA.CJPA;
 @SuppressWarnings("serial")
 public class Counter extends JFrame 
 {
-	private JButton button1;
+    private JButton button1;
     private JButton button2;
     private JPanel contentPane;
     private DataTableForm dtf;
@@ -183,7 +183,7 @@ public class Counter extends JFrame
     	}
     	else
     	{
-    		new ErrorWindow("ChybnÏ zadan· hodnota", "Error at: " + textfield[id].getName() + " Invalid or Missing value");
+    		new ErrorWindow("Chybn√¨ zadan√° hodnota", "Error at: " + textfield[id].getName() + " Invalid or Missing value");
     		makeRedBorder(control);
     	}
     }
