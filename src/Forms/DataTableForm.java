@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -46,6 +48,7 @@ public class DataTableForm extends JFrame
 	private JScrollPane scrollPane;
     private GridBagConstraints gbc;
     private JTextField[][] textfield;
+    private int x;
     
     public DataTableForm(String inputFormName)
     {
@@ -58,8 +61,23 @@ public class DataTableForm extends JFrame
     		case "Neutral": neutral(); break;
 	    	case "Money": money(); break;
     	}
+        this.addWindowStateListener(new WindowAdapter()
+        {
+        	public void windowStateChanged(WindowEvent e)
+        	{
+        		borderCorrection();
+        	}
+        });
         this.pack();
         this.setVisible(true);
+    }
+    
+    private void borderCorrection()
+    {
+    	for(int c = 0; c < 3; c++)
+    	{
+    		textfield[x][c].setBorder(Helper.defaultTextFieldBorder());
+    	}
     }
     
     private void setUp()
@@ -271,6 +289,7 @@ public class DataTableForm extends JFrame
     			value = Double.parseDouble(textfield[i][1].getText());
     		}
     	}
+    	this.x = index;
     	for(int c = 0; c < 3; c++)
     	{
     		textfield[index][c].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
@@ -289,6 +308,7 @@ public class DataTableForm extends JFrame
     			value = Double.parseDouble(textfield[i][1].getText());
     		}
     	}
+    	this.x = index;
     	for(int c = 0; c < 3; c++)
     	{
     		textfield[index][c].setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
