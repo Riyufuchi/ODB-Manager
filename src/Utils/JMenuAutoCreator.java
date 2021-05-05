@@ -16,7 +16,7 @@ import javax.swing.JMenuItem;
 
 public class JMenuAutoCreator 
 {
-	private int[] index;
+	private int[] index; //index
 	private JMenuBar menuBar;
     private JMenu[] menu;
     private JMenuItem[] menuItem;
