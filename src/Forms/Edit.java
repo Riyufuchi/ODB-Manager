@@ -18,6 +18,7 @@ import javax.swing.border.Border;
 
 import JPA.CJPA;
 import JPA.Money;
+import Utils.Helper;
 
 /*
  * Copyright Header
@@ -42,7 +43,6 @@ public class Edit extends JFrame
     private JTextField[] textfield;
     private GridBagConstraints gbc;
     private boolean saveToDB;
-    private Border borderTextfield;
     private CJPA odb;
     
     public Edit(DataTableForm dtf)
@@ -95,7 +95,6 @@ public class Edit extends JFrame
 	    	 textfield[i] = new JTextField();
 	    	 textfield[i].setName(labelTexts[i]);
 	     }
-	     borderTextfield = textfield[0].getBorder(); 
          gbc = new GridBagConstraints();
          contentPane.add(comboBox, getGBC(1, 0));
          for(int i = 0; i < labelTexts.length; i++)
@@ -156,10 +155,6 @@ public class Edit extends JFrame
     	control.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
     }
     
-    private void makeDefaultBorder(JComponent control, Border border)
-    {
-    	control.setBorder(border);
-    }
     
     private void undoneRedBorder()
     { 
@@ -167,7 +162,7 @@ public class Edit extends JFrame
     	{
     		if(i < textfield.length)
     		{
-    			makeDefaultBorder(textfield[i], borderTextfield);
+    			Helper.makeBorder(textfield[i], Helper.defaultTextFieldBorder());
     		}
     	}
     	saveToDB = true;

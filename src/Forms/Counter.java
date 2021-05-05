@@ -12,9 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import JPA.CJPA;
+import Utils.Helper;
 
 /*
  * Copyright Header
@@ -38,7 +38,6 @@ public class Counter extends JFrame
     private GridBagConstraints gbc;
     private boolean justAdd;
     private boolean saveToDB;
-    private Border borderTextfield;
     private CJPA odb;
     private JTextField[] textfield;
     
@@ -99,7 +98,6 @@ public class Counter extends JFrame
         	textfield[0].setName("Sum");
         	textfield[1] = new JTextField();
         	textfield[1].setName("Date");
-        	borderTextfield = textfield[0].getBorder(); 
         	label = new JLabel[2];
         	label[0] = new JLabel("Sum:");
         	label[1] = new JLabel("Date:");
@@ -124,7 +122,6 @@ public class Counter extends JFrame
 	        	textfield[i] = new JTextField();
 	        	textfield[i].setName(labelTexts[i]);
 	        }
-	        borderTextfield = textfield[0].getBorder(); 
 	        gbc = new GridBagConstraints();
 	        for(int i = 0; i < labelTexts.length; i++)
 	        {
@@ -194,16 +191,11 @@ public class Counter extends JFrame
     	control.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
     }
     
-    private void makeDefaultBorder(JComponent control, Border border)
-    {
-    	control.setBorder(border);
-    }
-    
     private void undoneRedBorder()
     { 
     	for(int i = 0; i < textfield.length; i++)
     	{
-    		makeDefaultBorder(textfield[i], borderTextfield);
+    		Helper.makeBorder(textfield[i], Helper.defaultTextFieldBorder());
     	}
     	saveToDB = true;
     }

@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import JPA.CJPA;
 import JPA.Money;
+import Utils.Helper;
 import Utils.JMenuAutoCreator;
 
 /*
@@ -49,15 +50,14 @@ public class DataTableForm extends JFrame
     public DataTableForm(String inputFormName)
     {
     	//this.inputFormName = inputFormName;
-    	switch(inputFormName)
+        this.setMinimumSize(new Dimension(400, 300));
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        switch(inputFormName)
     	{
     		case "Neutral": neutral(); break;
 	    	case "Money": money(); break;
     	}
-        this.setSize(400,300);
-        this.setMinimumSize(new Dimension(400, 300));
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
     }
@@ -237,9 +237,9 @@ public class DataTableForm extends JFrame
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            	nastavitOvladaciPrvky();	 
+    		            	nastavitOvladaciPrvky();	
     		            	highestSavings();
-    		            	prekresli();
+        		            prekresli();
     		            }
     		        });
     			break;
@@ -250,7 +250,7 @@ public class DataTableForm extends JFrame
     		            {
     		            	nastavitOvladaciPrvky();
     		            	lowestSavings();
-    		            	prekresli();
+        		            prekresli();
     		            }
     		        });
     			break;
@@ -297,8 +297,8 @@ public class DataTableForm extends JFrame
     
     private void prekresli()
     {
-    	this.pack();
     	this.repaint();
+    	this.pack();
     }
     
     public void nastavitOvladaciPrvky()
@@ -317,7 +317,6 @@ public class DataTableForm extends JFrame
 	        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
 		    }
         }
-        
     }
     
     private void setUpLabels()
