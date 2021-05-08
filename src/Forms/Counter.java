@@ -21,7 +21,7 @@ import Utils.Helper;
  * 
  * Projetct: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 23.07.2020
+ * Last Edit: 08.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -51,6 +51,7 @@ public class Counter extends JFrame
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         setUp();
+        this.setAlwaysOnTop(true);
         this.add(contentPane);
         this.pack();
         this.setVisible(true);

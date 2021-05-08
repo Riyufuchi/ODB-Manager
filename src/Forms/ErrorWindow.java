@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 04.05.2021
+ * Last Edit: 08.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -27,7 +27,6 @@ public class ErrorWindow extends JFrame
 	public ErrorWindow(String WindowTitle, String ErrorMessage)
     {
         this.setTitle(WindowTitle);
-        this.setSize(400, 300);
         this.setMinimumSize(new Dimension(300, 200));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -41,6 +40,7 @@ public class ErrorWindow extends JFrame
         contentPanel.add(errorMessageLabel);
         this.add(contentPanel);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
         this.addComponentListener(new ComponentAdapter() 
         {
             public void componentResized(ComponentEvent componentEvent) 

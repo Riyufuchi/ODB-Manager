@@ -12,6 +12,7 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import Forms.ErrorWindow;
@@ -21,11 +22,10 @@ import Forms.ErrorWindow;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 04.05.2021
+ * Last Edit: 08.05.2021
  * Created By: Riyufuchi
  * 
  */
-
 
 public class CJPA 
 {
@@ -55,16 +55,30 @@ public class CJPA
     
     public void createDB(String name)
     {
-        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(name);
-        em = emfactory.createEntityManager();
-        writeToConfigFile(name);
+    	try
+    	{
+	        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(name);
+	        em = emfactory.createEntityManager();
+	        writeToConfigFile(name);
+	    }
+		catch (PersistenceException e)
+		{
+			new ErrorWindow("Connection error", e.getMessage());
+		}
     }
     
     public void connectToDB(String name)
     {
-    	EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(name);
-        em = emfactory.createEntityManager();
-        writeToConfigFile(name);
+    	try 
+    	{
+	    	EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(name);
+	        em = emfactory.createEntityManager();
+	        writeToConfigFile(name);
+    	}
+    	catch (PersistenceException e)
+    	{
+    		new ErrorWindow("Connection error", e.getMessage());
+    	}
     }
     
     public Connection getCurrConnection()

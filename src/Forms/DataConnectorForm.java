@@ -21,7 +21,7 @@ import JPA.CJPA;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 04.05.2021
+ * Last Edit: 08.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -47,6 +47,7 @@ public class DataConnectorForm extends JFrame implements KeyListener
         this.setResizable(false);
         nastavitOvladaciPrvky(allowConnection);
         vytvoritUdalosti();
+        this.setAlwaysOnTop(true);
         this.add(contentPane);
         this.pack();
         this.setVisible(true);

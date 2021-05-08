@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import JPA.CJPA;
 import JPA.Money;
@@ -25,7 +24,7 @@ import Utils.Helper;
  * 
  * Projetct: ODB Manager
  * Created On: 23.07.2020
- * Last Edit: 03.05.2021
+ * Last Edit: 08.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -54,6 +53,7 @@ public class Edit extends JFrame
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         setUp();
+        this.setAlwaysOnTop(true);
         this.add(contentPane);
         this.pack();
         this.setVisible(true);
