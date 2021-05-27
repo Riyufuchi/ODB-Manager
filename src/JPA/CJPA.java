@@ -101,13 +101,12 @@ public class CJPA
     
     public List<?> getList(String query)
     {
-    	List<?> list1 = null;
     	try
     	{
     		em.getTransaction().begin();
-    		list1 = em.createQuery(query).getResultList();
+    		List<?> list1 = (em.createQuery(query)).getResultList();
     		em.getTransaction().commit();
-            //Query q1 = em.createQuery("SELECT c FROM Guest c");
+    		return list1;
     	}
     	catch(PersistenceException e)
     	{
@@ -121,7 +120,7 @@ public class CJPA
     	{
     		em.close();
     	}
-        return list1;
+    	return null;
     }
     
     public Connection getConnection(String name)

@@ -330,13 +330,6 @@ public class DataTableForm extends JFrame
         	contentPane.add(label[i], getGBC(i, 0));
         }
         setUpTextfield();
-        for(int x = 0; x < textfield.length; x++)
-        {
-	        for(int i = 0; i < textfield[0].length; i++)
-		    {
-	        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
-		    }
-        }
     }
     
     private void setUpLabels()
@@ -353,7 +346,7 @@ public class DataTableForm extends JFrame
     private void setUpTextfield()
     {
     	data = odb.getList(getQuery);
-    	if(!(data != null))
+    	if(data != null)
     	{
 	    	textfield = new JTextField[data.size()][labelTexts.length];
 	    	String[] listData;
@@ -366,6 +359,7 @@ public class DataTableForm extends JFrame
 		        	textfield[x][i].setEnabled(false);
 		        	textfield[x][i].setText(listData[i]);
 		        	textfield[x][i].setFont(mainFont);
+		        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
 			    }
 	        }
     	}
