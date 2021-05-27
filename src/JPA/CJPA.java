@@ -111,13 +111,11 @@ public class CJPA
     	catch(PersistenceException e)
     	{
     		new ErrorWindow("JPA Error", e.getMessage());
+    		em.close();
     	}
     	catch(Exception e)
     	{
     		new ErrorWindow("Error", e.getMessage());
-    	}
-    	finally
-    	{
     		em.close();
     	}
     	return null;

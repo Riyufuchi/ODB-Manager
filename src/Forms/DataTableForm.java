@@ -325,10 +325,6 @@ public class DataTableForm extends JFrame
     {
         gbc = new GridBagConstraints();
         setUpLabels();
-        for(int i = 0; i < labelTexts.length; i++)
-        {
-        	contentPane.add(label[i], getGBC(i, 0));
-        }
         setUpTextfield();
     }
     
@@ -340,6 +336,7 @@ public class DataTableForm extends JFrame
     		label[i] = new JLabel();
     		label[i].setFont(mainFont);
     		label[i].setText(labelTexts[i]);
+    		contentPane.add(label[i], getGBC(i, 0));
     	}
     }
     
