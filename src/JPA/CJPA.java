@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,7 +28,7 @@ import Forms.ErrorWindow;
  * 
  */
 
-public class CJPA 
+public class CJPA
 {
     private static CJPA instance;
     private static EntityManager em;
@@ -98,15 +99,28 @@ public class CJPA
         }
     }
     
-    @SuppressWarnings("rawtypes")
-    public List getList(String query)
+    public List<?> getList(String query)
     {
-        em.getTransaction().begin();
-        //Query q1 = em.createQuery("SELECT c FROM Guest c");
-        Query q1 = em.createQuery(query);
-		List list1 = q1.getResultList();
-        em.getTransaction().commit();
-        //em.close();
+    	List<?> list1 = null;
+    	try
+    	{
+    		em.getTransaction().begin();
+    		list1 = em.createQuery(query).getResultList();
+    		em.getTransaction().commit();
+            //Query q1 = em.createQuery("SELECT c FROM Guest c");
+    	}
+    	catch(PersistenceException e)
+    	{
+    		new ErrorWindow("JPA Error", e.getMessage());
+    	}
+    	catch(Exception e)
+    	{
+    		new ErrorWindow("Error", e.getMessage());
+    	}
+    	finally
+    	{
+    		em.close();
+    	}
         return list1;
     }
     
@@ -190,6 +204,7 @@ public class CJPA
 			{
 				bw.write(name);
 			    bw.flush();
+			    bw.close();
 			} 
 			catch (Exception e1) 
 			{

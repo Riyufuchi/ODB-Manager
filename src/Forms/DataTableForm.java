@@ -353,19 +353,22 @@ public class DataTableForm extends JFrame
     private void setUpTextfield()
     {
     	data = odb.getList(getQuery);
-    	textfield = new JTextField[data.size()][labelTexts.length];
-    	String[] listData;
-    	for(int x = 0; x < textfield.length; x++)
-        {
-    		listData = ((Money)data.get(x)).getDataArray();
-	        for(int i = 0; i < textfield[0].length; i++)
-		    {
-	        	textfield[x][i] = new JTextField();
-	        	textfield[x][i].setEnabled(false);
-	        	textfield[x][i].setText(listData[i]);
-	        	textfield[x][i].setFont(mainFont);
-		    }
-        }
+    	if(!(data != null))
+    	{
+	    	textfield = new JTextField[data.size()][labelTexts.length];
+	    	String[] listData;
+	    	for(int x = 0; x < textfield.length; x++)
+	        {
+	    		listData = ((Money)data.get(x)).getDataArray();
+		        for(int i = 0; i < textfield[0].length; i++)
+			    {
+		        	textfield[x][i] = new JTextField();
+		        	textfield[x][i].setEnabled(false);
+		        	textfield[x][i].setText(listData[i]);
+		        	textfield[x][i].setFont(mainFont);
+			    }
+	        }
+    	}
     }
     
     public List<?> getData()
