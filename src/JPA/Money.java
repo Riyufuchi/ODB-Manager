@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * 
  * Projetct: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 21.07.2020
+ * Last Edit: 29.05.2021
  * Created By: Riyufuchi
  * 
  */
@@ -31,6 +31,13 @@ public class Money
 	
 	public Money(double sum, String date)
 	{
+		this.moneySum = sum;
+		this.date = date;
+	}
+	
+	public Money(int id, double sum, String date)
+	{
+		this.ID = id;
 		this.moneySum = sum;
 		this.date = date;
 	}

@@ -146,8 +146,8 @@ public class DataTableForm extends JFrame
     
     public void generujMenu()
     {
-    	String[] menu = {"Database", "Operations", "Tools", "Help"};
-    	String[] menuItems = {"Create", "Connect", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
+    	String[] menu = {"Database", "Export", "Import", "Operations", "Tools", "Help"};
+    	String[] menuItems = {"Create", "Connect", "Exit", ""," to .csv", "", "from .csv", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
     	mac = new JMenuAutoCreator(menu, menuItems);
     	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
@@ -272,6 +272,27 @@ public class DataTableForm extends JFrame
     		            }
     		        });
     			break;
+    			case "to .csv": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	nastavitOvladaciPrvky();
+    		            	Helper.saveToCVS("export.csv", getData());
+    		            }
+    		        });
+    			break;
+    			case "from .csv": 
+    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    		    	{
+    		            public void actionPerformed(ActionEvent evt) 
+    		            {
+    		            	gbc = new GridBagConstraints();
+    		                gbc.fill = GridBagConstraints.HORIZONTAL;
+    		            	loadData(Helper.loadFromCVS("export.csv"));
+    		            }
+    		        });
+    			break;
     		}
     	}
     	this.setJMenuBar(mac.getJMenuBar());
@@ -324,6 +345,7 @@ public class DataTableForm extends JFrame
     public void nastavitOvladaciPrvky()
     {
         gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         setUpLabels();
         setUpTextfield();
     }
@@ -362,14 +384,36 @@ public class DataTableForm extends JFrame
     	}
     }
     
-    public List<?> getData()
+    public void loadData(List<Money> dataList)
     {
-    	return data;
+    	data = dataList;
+    	if(data != null)
+    	{
+	    	textfield = new JTextField[data.size()][labelTexts.length];
+	    	String[] listData;
+	    	for(int x = 0; x < textfield.length; x++)
+	        {
+	    		listData = ((Money)data.get(x)).getDataArray();
+		        for(int i = 0; i < textfield[0].length; i++)
+			    {
+		        	textfield[x][i] = new JTextField();
+		        	textfield[x][i].setEnabled(false);
+		        	textfield[x][i].setText(listData[i]);
+		        	textfield[x][i].setFont(mainFont);
+		        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
+			    }
+	        }
+    	}
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<Money> getData()
+    {
+    	return ((List<Money>)data);
     }
     
 	private GridBagConstraints getGBC(int x, int y)
     {
-    	gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = x;
         gbc.gridy = y;
         return gbc;
