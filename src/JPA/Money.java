@@ -5,14 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/*
+/**
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 21.07.2020
  * Last Edit: 29.05.2021
- * Created By: Riyufuchi
- * 
+ * @author Riyufuchi
+ * @version 1.0
+ * @since 1.0
  */
 
 @Entity

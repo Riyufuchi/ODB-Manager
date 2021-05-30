@@ -20,17 +20,19 @@ import javax.swing.JTextField;
 
 import JPA.CJPA;
 import JPA.Money;
+import Utils.FinalValues;
 import Utils.Helper;
 import Utils.JMenuAutoCreator;
 
-/*
+/**
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
  * Last Edit: 05.05.2021
- * Created By: Riyufuchi
- * 
+ * @author Riyufuchi
+ * @version 1.0
+ * @since 1.0
  */
 
 @SuppressWarnings("serial")
@@ -147,7 +149,7 @@ public class DataTableForm extends JFrame
     public void generujMenu()
     {
     	String[] menu = {"Database", "Export", "Import", "Operations", "Tools", "Help"};
-    	String[] menuItems = {"Create", "Connect", "Exit", ""," to .csv", "", "from .csv", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
+    	String[] menuItems = {"Create", "Connect", "Exit", "","to .csv", "", "from .csv", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
     	mac = new JMenuAutoCreator(menu, menuItems);
     	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
@@ -236,6 +238,7 @@ public class DataTableForm extends JFrame
     		            public void actionPerformed(ActionEvent evt) 
     		            {
     		            	new ErrorWindow("About", "This is ODB database manager.\n"
+    		            			+ "Version: " + FinalValues.version + "\n"
     		            			+ "Created by Riyufuchi.\n"
     		            			+ "Free libs under OpenSource lincention are used (I thnink), however my code is not under OpenSource licention.");
     		            }

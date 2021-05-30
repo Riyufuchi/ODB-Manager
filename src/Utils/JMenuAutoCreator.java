@@ -4,14 +4,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-/*
+/**
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 21.07.2020
- * Created By: Riyufuchi
- * 
+ * Last Edit: 30.05.2021
+ * @author Riyufuchi
+ * @version 1.1
+ * @since 1.0 
  */
 
 public class JMenuAutoCreator 
@@ -33,13 +34,8 @@ public class JMenuAutoCreator
 		int value = 0;
 		int i = 0;
 		int i2 = 0;
-		while(true)
+		while(i < menuItemLabels.length)
 		{
-			if(i >= menuItemLabels.length)
-			{
-				index[i2] = value;
-				break;
-			}
 			if(!(menuItemLabels[i].equals("")))
 			{
 				value++;
@@ -53,6 +49,7 @@ public class JMenuAutoCreator
 				i2++;
 			}
 		}
+		index[i2] = value;
 		return index;
 	}
 	

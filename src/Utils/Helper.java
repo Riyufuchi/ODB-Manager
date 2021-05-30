@@ -15,6 +15,17 @@ import javax.swing.border.Border;
 import Forms.ErrorWindow;
 import JPA.Money;
 
+/**
+ * Copyright Header
+ * 
+ * Projetct: ODB Manager
+ * Created On: 13.07.2020
+ * Last Edit: 08.05.2021
+ * @author Riyufuchi
+ * @version 1.0
+ * @since 1.2 
+ */
+
 public class Helper 
 {
 	 public static Border defaultTextFieldBorder()
@@ -33,7 +44,7 @@ public class Helper
 		 {
 			 for (Money m : data) 
 	         {
-				 String[] values = {String.valueOf(m.getID()), String.valueOf(m.getMoneySum()), m.getDate()};
+				 String[] values = {String.valueOf(m.getMoneySum()), m.getDate()};
 				 bw.append(String.join(";", values) + "\n");
 	         }
 			 bw.flush();
@@ -48,12 +59,14 @@ public class Helper
 	 {
 		 try (BufferedReader br = new BufferedReader(new FileReader(path))) 
 		 {
+			 int i = 1;
 			 List<Money> l = new LinkedList<Money>();
 			 String s;
 			 while ((s = br.readLine()) != null) 
 			 {
 				 String[] split = s.split(";");
-				 l.add(new Money(Integer.valueOf(split[0]), Double.valueOf(split[1]), split[2]));
+				 l.add(new Money(i, Double.valueOf(split[0]), split[1]));
+				 i++;
 			 }
 			 return l;
 		 }

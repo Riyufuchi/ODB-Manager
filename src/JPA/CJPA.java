@@ -18,14 +18,15 @@ import javax.persistence.Query;
 
 import Forms.ErrorWindow;
 
-/*
+/**
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
  * Last Edit: 08.05.2021
- * Created By: Riyufuchi
- * 
+ * @author Riyufuchi
+ * @version 1.1
+ * @since 1.0
  */
 
 public class CJPA
@@ -116,7 +117,7 @@ public class CJPA
     	catch(Exception e)
     	{
     		new ErrorWindow("Error", e.getMessage());
-    		em.close();
+    		//em.close();
     	}
     	return null;
     }

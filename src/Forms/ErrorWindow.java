@@ -8,14 +8,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-/*
+/**
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
  * Last Edit: 08.05.2021
- * Created By: Riyufuchi
- * 
+ * @author Riyufuchi
+ * @version 1.0
+ * @since 1.0
  */
 
 @SuppressWarnings("serial")

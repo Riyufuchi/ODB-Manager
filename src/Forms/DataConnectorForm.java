@@ -16,14 +16,15 @@ import javax.swing.JTextField;
 
 import JPA.CJPA;
 
-/*
+/**
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
  * Last Edit: 08.05.2021
- * Created By: Riyufuchi
- * 
+ * @author Riyufuchi
+ * @version 1.0
+ * @since 1.0 
  */
 
 @SuppressWarnings("serial")
