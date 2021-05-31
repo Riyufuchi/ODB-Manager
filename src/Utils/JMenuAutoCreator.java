@@ -9,7 +9,7 @@ import javax.swing.JMenuItem;
  * 
  * Projetct: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 30.05.2021
+ * Last Edit: 31.05.2021
  * @author Riyufuchi
  * @version 1.1
  * @since 1.0 
@@ -21,10 +21,20 @@ public class JMenuAutoCreator
 	private JMenuBar menuBar;
 	private JMenu[] menu;
 	private JMenuItem[] menuItem;
+	private int lineSeparator;
 	
 	public JMenuAutoCreator(String[] menuLabels, String[] menuItemLabels)
 	{
-		index = new int[menuLabels.length];
+		this.index = new int[menuLabels.length];
+		this.lineSeparator = 2;
+		layoutButtonIndex(JMenuItemsPerSection(menuItemLabels));
+		generateMenu(menuLabels, menuItemLabels);
+	}
+	
+	public JMenuAutoCreator(String[] menuLabels, String[] menuItemLabels, int lineSeparator)
+	{
+		this.index = new int[menuLabels.length];
+		this.lineSeparator = lineSeparator;
 		layoutButtonIndex(JMenuItemsPerSection(menuItemLabels));
 		generateMenu(menuLabels, menuItemLabels);
 	}
@@ -108,11 +118,16 @@ public class JMenuAutoCreator
 				}
 				else
 				{
-					switch(i)
+					if(lineSeparator == i)
 					{
-						case 2: menu[x].addSeparator(); menu[x].add(menuItem[i]); break;
-						default: menu[x].add(menuItem[i]); break;
+						menu[x].addSeparator();
+						menu[x].add(menuItem[i]);
 					}
+					else
+					{
+						menu[x].add(menuItem[i]);
+					}
+					
 				}
 				menuBar.add(menu[x]);
 			}

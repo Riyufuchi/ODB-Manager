@@ -21,17 +21,16 @@ import JPA.CJPA;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 08.05.2021
+ * Last Edit: 31.05.2021
  * @author Riyufuchi
- * @version 1.0
+ * @version 1.1
  * @since 1.0 
  */
 
 @SuppressWarnings("serial")
 public class DataConnectorForm extends JFrame implements KeyListener
 {
-    private JButton button1;
-    private JButton button2;
+    private JButton button1, button2;
     private JPanel contentPane;
     private JLabel[] label;
     private String[] labelTexts = {"Akce:", "Nazev natabaze:"};
@@ -46,6 +45,8 @@ public class DataConnectorForm extends JFrame implements KeyListener
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.gbc = new GridBagConstraints();
+        this.gbc.fill = GridBagConstraints.HORIZONTAL;
         nastavitOvladaciPrvky(allowConnection);
         vytvoritUdalosti();
         this.setAlwaysOnTop(true);
@@ -68,32 +69,27 @@ public class DataConnectorForm extends JFrame implements KeyListener
          button2.setBackground(new Color(214,217,223));
          button2.setForeground(new Color(0,0,0));
          button2.setText("Zavøít");
-         vytvorLabely();
          comboBox = new JComboBox();
          comboBox.setBackground(new Color(214,217,223));
-         comboBox.addItem("Vytvoøit novou Databázi");
          if(allowConnection)
          {
+        	 comboBox.addItem("Vytvoøit novou Databázi");
         	 comboBox.addItem("Pøipojit ke stávající Databázi");
         	 button1.setText("Pøipojit Databázi");
         	 comboBox.setSelectedIndex(1);
          }
+         else
+         {
+        	 comboBox.addItem("Vytvoøit novou Databázi");
+        	 comboBox.setEnabled(false);
+         }
          textfield = new JTextField();
          textfield.addKeyListener(this);
-         gbc = new GridBagConstraints();
-         for(int i = 0; i < labelTexts.length; i++)
-         {
-         	contentPane.add(getLabely(i), getGBC(0, i));
-         }
+         vytvorLabely();
          contentPane.add(textfield, getGBC(1, 1));
          contentPane.add(comboBox, getGBC(1, 0));
          contentPane.add(button1, getGBC(1, 2));
          contentPane.add(button2, getGBC(0, 2));
-    }
-    
-    private JLabel getLabely(int i)
-    {
-    	return label[i];
     }
     
     private void vytvorLabely()
@@ -103,12 +99,12 @@ public class DataConnectorForm extends JFrame implements KeyListener
     	{
     		label[i] = new JLabel();
     		label[i].setText(labelTexts[i]);
+    		contentPane.add(label[i], getGBC(0, i));
     	}
     }
     
     private GridBagConstraints getGBC(int x, int y)
     {
-    	gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = x;
         gbc.gridy = y;
 		return gbc;

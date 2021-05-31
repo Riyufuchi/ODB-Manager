@@ -29,9 +29,9 @@ import Utils.JMenuAutoCreator;
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 05.05.2021
+ * Last Edit: 31.05.2021
  * @author Riyufuchi
- * @version 1.0
+ * @version 1.2
  * @since 1.0
  */
 
@@ -58,6 +58,8 @@ public class DataTableForm extends JFrame
         this.setMinimumSize(new Dimension(400, 300));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        this.gbc = new GridBagConstraints();
+        this.gbc.fill = GridBagConstraints.HORIZONTAL;
         switch(inputFormName)
     	{
     		case "Neutral": neutral(); break;
@@ -76,9 +78,12 @@ public class DataTableForm extends JFrame
     
     private void borderCorrection()
     {
-    	for(int c = 0; c < 3; c++)
+    	if(textfield != null)
     	{
-    		textfield[x][c].setBorder(Helper.defaultTextFieldBorder());
+	    	for(int c = 0; c < 3; c++)
+	    	{
+	    		textfield[x][c].setBorder(Helper.defaultTextFieldBorder());
+	    	}
     	}
     }
     
@@ -88,7 +93,6 @@ public class DataTableForm extends JFrame
         contentPane = new JPanel(null);
         contentPane.setBackground(new Color(192,192,192));
         contentPane.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
         generujMenu();
         contentPane.revalidate();
         scrollPane = new JScrollPane(contentPane);
@@ -148,9 +152,9 @@ public class DataTableForm extends JFrame
     
     public void generujMenu()
     {
-    	String[] menu = {"Database", "Export", "Import", "Operations", "Tools", "Help"};
-    	String[] menuItems = {"Create", "Connect", "Exit", "","to .csv", "", "from .csv", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
-    	mac = new JMenuAutoCreator(menu, menuItems);
+    	String[] menu = {"Database", "Operations", "Tools", "Help"};
+    	String[] menuItems = {"Create", "Connect", "Export", "Import", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
+    	mac = new JMenuAutoCreator(menu, menuItems, 4);
     	for(int i = 0; i < mac.getMenuItem().length; i++)
     	{
     		switch(mac.getMenuItem()[i].getName())
@@ -275,30 +279,32 @@ public class DataTableForm extends JFrame
     		            }
     		        });
     			break;
-    			case "to .csv": 
+    			case "Export": 
     				mac.getMenuItem()[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            	nastavitOvladaciPrvky();
-    		            	Helper.saveToCVS("export.csv", getData());
+    		            	new DatabaseFileIO("Export", getData());
     		            }
     		        });
     			break;
-    			case "from .csv": 
+    			case "Import": 
     				mac.getMenuItem()[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
-    		            	gbc = new GridBagConstraints();
-    		                gbc.fill = GridBagConstraints.HORIZONTAL;
-    		            	loadData(Helper.loadFromCVS("export.csv"));
+    		            	importDialog();
     		            }
     		        });
     			break;
     		}
     	}
     	this.setJMenuBar(mac.getJMenuBar());
+    }
+    
+    private void importDialog()
+    {
+    	new DatabaseFileIO("Import", this);
     }
     
     private void highestSavings()
@@ -347,8 +353,6 @@ public class DataTableForm extends JFrame
     
     public void nastavitOvladaciPrvky()
     {
-        gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
         setUpLabels();
         setUpTextfield();
     }

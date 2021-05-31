@@ -33,8 +33,7 @@ import Utils.Helper;
 @SuppressWarnings("serial")
 public class Edit extends JFrame 
 {
-    private JButton button1;
-    private JButton button2;
+    private JButton button1, button2;
     private JPanel contentPane;
     private JLabel[] label;
     private String[] labelTexts = {"Item ID:", "Amout of money:", "Date:"};

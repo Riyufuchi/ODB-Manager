@@ -30,15 +30,13 @@ import Utils.Helper;
 @SuppressWarnings("serial")
 public class Counter extends JFrame 
 {
-    private JButton button1;
-    private JButton button2;
+    private JButton button1, button2;
     private JPanel contentPane;
     private DataTableForm dtf;
     private JLabel[] label;
     private String[] labelTexts = {"Bank accout:", "Paypal:", "Cash:", "Depths:", "Owns:", "Date:"};
     private GridBagConstraints gbc;
-    private boolean justAdd;
-    private boolean saveToDB;
+    private boolean justAdd, saveToDB;
     private CJPA odb;
     private JTextField[] textfield;
     
