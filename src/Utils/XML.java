@@ -58,7 +58,7 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 	public XML(String path, String mainElement, String subElement)
 	{
 		this.xof = XMLOutputFactory.newInstance();
-        this.xsw = null;
+		this.xsw = null;
 		this.path = path;
 		this.mainElement = mainElement;
 		this.subElement = subElement;
@@ -100,22 +100,22 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 		}
 		catch (NullPointerException | IOException | XMLStreamException e) 
 		{
-            new ErrorWindow("XML error", e.getMessage());
-        } 
+			new ErrorWindow("XML error", e.getMessage());
+		} 
 		finally 
 		{
-            try 
-            {
-                if (xsw != null) 
-                {
-                    xsw.close();
-                }
-            } 
-            catch (XMLStreamException e) 
-            {
-            	new ErrorWindow("XML closing error", e.getMessage());
-            }
-        }
+			try 
+			{
+				if (xsw != null) 
+				{
+					xsw.close();
+				}
+			} 
+			catch (XMLStreamException e) 
+			{
+				new ErrorWindow("XML closing error", e.getMessage());
+			}
+		}
 		try 
 		{
 			format();
@@ -153,21 +153,21 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 			catch (IOException | XMLStreamException e) 
 			{
 	            new ErrorWindow("XML error", e.getMessage());
-	        } 
+			} 
 			finally 
 			{
-	            try 
-	            {
-	                if (xsw != null) 
-	                {
-	                    xsw.close();
-	                }
-	            } 
-	            catch (XMLStreamException e) 
-	            {
-	            	new ErrorWindow("XML closing error", e.getMessage());
-	            }
-	        }
+				try 
+				{
+					if (xsw != null) 
+					{
+						xsw.close();
+					}
+				} 
+				catch (XMLStreamException e) 
+				{
+					new ErrorWindow("XML closing error", e.getMessage());
+				}
+			}
 			try 
 			{
 				format();
@@ -205,19 +205,19 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 	public void format() throws IOException, ParserConfigurationException, TransformerException, SAXException
 	{
 		factory = DocumentBuilderFactory.newInstance();
-        builder = factory.newDocumentBuilder();
-        document = builder.parse(new InputSource(new InputStreamReader(new FileInputStream(path))));
-        xformer = TransformerFactory.newInstance().newTransformer();
-        xformer.setOutputProperty(OutputKeys.METHOD, "xml");
-        xformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        Source source = new DOMSource(document);
-        Result result = new StreamResult(new File(path));
-        xformer.transform(source, result);
+		builder = factory.newDocumentBuilder();
+		document = builder.parse(new InputSource(new InputStreamReader(new FileInputStream(path))));
+		xformer = TransformerFactory.newInstance().newTransformer();
+		xformer.setOutputProperty(OutputKeys.METHOD, "xml");
+		xformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		Source source = new DOMSource(document);
+		Result result = new StreamResult(new File(path));
+		xformer.transform(source, result);
 	}
 	
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException 
-    {
+	{
 		switch (qName) 
 		{
 			case FinalValues.SUM:
@@ -227,7 +227,7 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 				writeDate = true;
 				break;
 		}
-    }
+	}
 
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException 
