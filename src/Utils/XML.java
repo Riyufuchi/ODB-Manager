@@ -152,7 +152,7 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 			}
 			catch (IOException | XMLStreamException e) 
 			{
-	            new ErrorWindow("XML error", e.getMessage());
+				new ErrorWindow("XML error", e.getMessage());
 			} 
 			finally 
 			{
