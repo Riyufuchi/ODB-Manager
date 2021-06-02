@@ -242,7 +242,7 @@ public class DataTableForm extends JFrame
     		            public void actionPerformed(ActionEvent evt) 
     		            {
     		            	new ErrorWindow("About", "This is ODB database manager.\n"
-    		            			+ "Version: " + FinalValues.version + "\n"
+    		            			+ "Version: " + FinalValues.VERSION + "\n"
     		            			+ "Created by Riyufuchi.\n"
     		            			+ "Free libs under OpenSource lincention are used (I thnink), however my code is not under OpenSource licention.");
     		            }

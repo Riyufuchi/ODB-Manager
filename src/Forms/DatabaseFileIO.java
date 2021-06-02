@@ -24,7 +24,7 @@ import Utils.XML;
  * 
  * Projetct: ODB Manager
  * Created On: 31.05.2021
- * Last Edit: 31.05.2021
+ * Last Edit: 02.06.2021
  * @author Riyufuchi
  * @version 1.0
  * @since 1.3 
@@ -184,6 +184,8 @@ public class DatabaseFileIO extends JFrame
     				break;
     			case 1: 
     				XML xml = new XML(pathToFile.getText(), "MoneyExport", "Money");
+    				xml.parsujMoney();
+    				list = xml.getList();
     				break;
     		}
 		}

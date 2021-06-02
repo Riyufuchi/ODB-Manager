@@ -5,10 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -21,6 +24,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
+import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -30,23 +34,26 @@ import JPA.Money;
 /**
  * Projetct: ODB Manager
  * Created On: 30.05.2021
- * Last Edit: 31.05.2021
+ * Last Edit: 02.06.2021
  * @author Riyufuchi
  * @version 1.0
  * @since 1.3 
  */
 
-public class XML 
+public class XML extends org.xml.sax.helpers.DefaultHandler
 {
 	private XMLOutputFactory xof;
 	private XMLStreamWriter xsw;
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
+	private SAXParser parser;
 	private Document document;
 	private Transformer xformer;
-	private String path;
-	private String mainElement;
-	private String subElement;
+	private String path, mainElement, subElement, date = "1.1.2018";
+	private boolean writeSum = false, writeDate = false;
+	private Double sum = 0.0;
+	private int id;	
+	private List<Money> list;
 	
 	public XML(String path, String mainElement, String subElement)
 	{
@@ -55,6 +62,15 @@ public class XML
 		this.path = path;
 		this.mainElement = mainElement;
 		this.subElement = subElement;
+		this.id = 0;
+	}
+	
+	public XML(String path)
+	{
+		this.xof = XMLOutputFactory.newInstance();
+        this.xsw = null;
+		this.path = path;
+		this.id = 0;
 	}
 	
 	public void exportXML(List<Money> data)
@@ -167,6 +183,25 @@ public class XML
 		}
 	}
 	
+	public void parsujMoney() 
+    {
+		list = new ArrayList<Money>();
+        try 
+        {
+			parser = SAXParserFactory.newInstance().newSAXParser();
+			parser.parse(new File(path), this);
+		} 
+        catch (ParserConfigurationException | SAXException | IOException e) 
+        {
+			new ErrorWindow("XML read error", e.getMessage());
+		}
+    }
+	
+	public List<Money> getList()
+	{
+		return list;
+	}
+	
 	public void format() throws IOException, ParserConfigurationException, TransformerException, SAXException
 	{
 		factory = DocumentBuilderFactory.newInstance();
@@ -179,4 +214,50 @@ public class XML
         Result result = new StreamResult(new File(path));
         xformer.transform(source, result);
 	}
+	
+	@Override
+    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException 
+    {
+		switch (qName) 
+        {
+	        case FinalValues.SUM:
+	            writeSum = true;
+	            break;
+	        case FinalValues.DATE:
+	            writeDate = true;
+	            break;
+        }
+    }
+
+    @Override
+    public void endElement(String uri, String localName, String qName) throws SAXException 
+    {
+        switch (qName) 
+        {
+        case FinalValues.SUM:
+           writeSum = false;
+            break;
+        case FinalValues.DATE:
+            writeDate = false;
+            break;
+        case FinalValues.SubELEMENT:
+            list.add(new Money(id, sum, date));
+            id++;
+            break;
+        }
+    }
+
+    @Override
+    public void characters(char[] ch, int start, int length) throws SAXException 
+    {
+        String text = new String(ch, start, length);
+        if (writeSum) 
+        { 
+            sum = Double.valueOf(text);
+        } 
+        else if (writeDate) 
+        { 
+            date = text;
+        }
+    }
 }
