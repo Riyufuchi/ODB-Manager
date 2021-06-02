@@ -68,7 +68,7 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 	public XML(String path)
 	{
 		this.xof = XMLOutputFactory.newInstance();
-        this.xsw = null;
+		this.xsw = null;
 		this.path = path;
 		this.id = 0;
 	}
@@ -184,18 +184,18 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 	}
 	
 	public void parsujMoney() 
-    {
+	{
 		list = new ArrayList<Money>();
-        try 
-        {
+		try 
+		{
 			parser = SAXParserFactory.newInstance().newSAXParser();
 			parser.parse(new File(path), this);
 		} 
-        catch (ParserConfigurationException | SAXException | IOException e) 
-        {
+		catch (ParserConfigurationException | SAXException | IOException e) 
+		{
 			new ErrorWindow("XML read error", e.getMessage());
 		}
-    }
+	}
 	
 	public List<Money> getList()
 	{
@@ -216,48 +216,48 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 	}
 	
 	@Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException 
+	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException 
     {
 		switch (qName) 
-        {
-	        case FinalValues.SUM:
-	            writeSum = true;
-	            break;
-	        case FinalValues.DATE:
-	            writeDate = true;
-	            break;
-        }
+		{
+			case FinalValues.SUM:
+				writeSum = true;
+				break;
+			case FinalValues.DATE:
+				writeDate = true;
+				break;
+		}
     }
 
-    @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException 
-    {
-        switch (qName) 
-        {
-        case FinalValues.SUM:
-           writeSum = false;
-            break;
-        case FinalValues.DATE:
-            writeDate = false;
-            break;
-        case FinalValues.SubELEMENT:
-            list.add(new Money(id, sum, date));
-            id++;
-            break;
-        }
-    }
+	@Override
+	public void endElement(String uri, String localName, String qName) throws SAXException 
+	{
+		switch (qName) 
+		{
+			case FinalValues.SUM:
+				writeSum = false;
+				break;
+			case FinalValues.DATE:
+				writeDate = false;
+				break;
+			case FinalValues.SubELEMENT:
+				list.add(new Money(id, sum, date));
+				id++;
+				break;
+		}
+	}
 
-    @Override
-    public void characters(char[] ch, int start, int length) throws SAXException 
-    {
-        String text = new String(ch, start, length);
-        if (writeSum) 
-        { 
-            sum = Double.valueOf(text);
-        } 
-        else if (writeDate) 
-        { 
-            date = text;
-        }
-    }
+	@Override
+	public void characters(char[] ch, int start, int length) throws SAXException 
+	{
+		String text = new String(ch, start, length);
+		if (writeSum) 
+		{ 
+			sum = Double.valueOf(text);
+		} 
+		else if (writeDate) 
+		{ 
+			date = text;
+		}
+	}
 }
