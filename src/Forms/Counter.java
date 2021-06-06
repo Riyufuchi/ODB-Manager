@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import JPA.CJPA;
+import Utils.FinalValues;
 import Utils.Helper;
 
 /**
@@ -21,9 +22,9 @@ import Utils.Helper;
  * 
  * Projetct: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 08.05.2021
+ * Last Edit: 06.06.2021
  * @author Riyufuchi
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 
@@ -81,15 +82,13 @@ public class Counter extends JFrame
 	private void nastavitOvladaciPrvky()
     {
     	contentPane = new JPanel(null);
-        contentPane.setBackground(new Color(192,192,192));
+        contentPane.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
         contentPane.setLayout(new GridBagLayout());
     	button1 = new JButton();
-        button1.setBackground(new Color(214,217,223));
-        button1.setForeground(new Color(0,0,0));
+        button1.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
         button1.setText("Save to Database");
         button2 = new JButton();
-        button2.setBackground(new Color(214,217,223));
-        button2.setForeground(new Color(0,0,0));
+        button2.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
         button2.setText("Close");
         if(justAdd)
         {

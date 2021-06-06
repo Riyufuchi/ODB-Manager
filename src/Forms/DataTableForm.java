@@ -31,7 +31,7 @@ import Utils.JMenuAutoCreator;
  * Created On: 13.07.2020
  * Last Edit: 31.05.2021
  * @author Riyufuchi
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 
@@ -91,7 +91,7 @@ public class DataTableForm extends JFrame
     {
     	mainFont = new Font("Dialog.plain", Font.BOLD, 14);
         contentPane = new JPanel(null);
-        contentPane.setBackground(new Color(192,192,192));
+        contentPane.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
         contentPane.setLayout(new GridBagLayout());
         generujMenu();
         contentPane.revalidate();

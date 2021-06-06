@@ -1,6 +1,5 @@
 package Forms;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import JPA.Money;
+import Utils.FinalValues;
 import Utils.Helper;
 import Utils.XML;
 
@@ -24,9 +24,9 @@ import Utils.XML;
  * 
  * Projetct: ODB Manager
  * Created On: 31.05.2021
- * Last Edit: 02.06.2021
+ * Last Edit: 06.06.2021
  * @author Riyufuchi
- * @version 1.0
+ * @version 1.1
  * @since 1.3 
  */
 
@@ -90,7 +90,7 @@ public class DatabaseFileIO extends JFrame
     	for(int i = 0; i < comboBoxes.length; i++)
     	{
     		comboBoxes[i] = new JComboBox<String>();
-    		comboBoxes[i].setBackground(new Color(214,217,223));
+    		comboBoxes[i].setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
     		contentPane.add(comboBoxes[i], getGBC(1, i));
     		for(int l = 0; l < comboBoxTexts[i].length; l++)
     		{
@@ -103,11 +103,9 @@ public class DatabaseFileIO extends JFrame
 	{
 		ok = new JButton();
 		cancel = new JButton();
-        ok.setBackground(new Color(214,217,223));
-        ok.setForeground(new Color(0,0,0));
+        ok.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
         ok.setText("Import data");
-        cancel.setBackground(new Color(214,217,223));
-        cancel.setForeground(new Color(0,0,0));
+        cancel.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
         cancel.setText("Cancel");
 	}
 	
@@ -120,7 +118,7 @@ public class DatabaseFileIO extends JFrame
 	private void setComponents()
     {
          contentPane = new JPanel(null);
-         contentPane.setBackground(new Color(192,192,192));
+         contentPane.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
          contentPane.setLayout(new GridBagLayout());
          setComboBoxes();
          setButtons();

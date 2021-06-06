@@ -8,14 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Utils.FinalValues;
+
 /**
  * Copyright Header
  * 
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 08.05.2021
+ * Last Edit: 06.06.2021
  * @author Riyufuchi
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 
@@ -37,6 +39,7 @@ public class ErrorWindow extends JFrame
         errorMessageLabel.setEditable(false);
         errorMessageLabel.setLineWrap(true);
         errorMessageLabel.setWrapStyleWord(true);
+        errorMessageLabel.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
         errorMessageLabel.setFont(javax.swing.UIManager.getDefaults().getFont("Label.font"));
         contentPanel.add(errorMessageLabel);
         this.add(contentPanel);

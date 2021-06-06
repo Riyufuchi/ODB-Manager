@@ -12,25 +12,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import JPA.CJPA;
+import Utils.FinalValues;
 
 /**
  * Copyright Header
  *
  * Projetct: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 08.05.2021
+ * Last Edit: 06.06.2021
  * @author Riyufuchi
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 
 @SuppressWarnings("serial")
 public class Operator extends JFrame
 {
-    private JButton button1, button2;
-    private JPanel contentPane;
-    private JLabel[] label;
-    private String[] labelTexts = {"Item ID:"};
+	private JButton button1, button2;
+	private JPanel contentPane;
+	private JLabel[] label;
+	private String[] labelTexts = {"Item ID:"};
     private GridBagConstraints gbc;
     private JComboBox<String> comboBox;
     
@@ -53,19 +54,19 @@ public class Operator extends JFrame
 	private void nastavitOvladaciPrvky(int[] ID)
     {
          contentPane = new JPanel(null);
-         contentPane.setBackground(new Color(192,192,192));
+         contentPane.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
          contentPane.setLayout(new GridBagLayout());
     	 button1 = new JButton();
-         button1.setBackground(new Color(214,217,223));
+         button1.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
          button1.setForeground(new Color(0,0,0));
          button1.setText("Smazat záznam");
          button2 = new JButton();
-         button2.setBackground(new Color(214,217,223));
+         button2.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
          button2.setForeground(new Color(0,0,0));
          button2.setText("Zavøít");
          vytvorLabely();
          comboBox = new JComboBox();
-         comboBox.setBackground(new Color(214,217,223));
+         comboBox.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
          for(int i = 0; i < ID.length; i++)
          {
         	 comboBox.addItem(Integer.toString(ID[i]));
