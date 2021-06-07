@@ -21,7 +21,7 @@ import Forms.ErrorWindow;
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 13.07.2020
  * Last Edit: 08.05.2021
  * @author Riyufuchi

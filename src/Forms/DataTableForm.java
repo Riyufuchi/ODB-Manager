@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -27,11 +28,11 @@ import Utils.JMenuAutoCreator;
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 31.05.2021
+ * Last Edit: 07.06.2021
  * @author Riyufuchi
- * @version 1.3
+ * @version 1.4
  * @since 1.0
  */
 
@@ -50,7 +51,7 @@ public class DataTableForm extends JFrame
 	private JScrollPane scrollPane;
     private GridBagConstraints gbc;
     private JTextField[][] textfield;
-    private int x;
+    private int lastMarkedLine;
     
     public DataTableForm(String inputFormName)
     {
@@ -82,7 +83,7 @@ public class DataTableForm extends JFrame
     	{
 	    	for(int c = 0; c < 3; c++)
 	    	{
-	    		textfield[x][c].setBorder(Helper.defaultTextFieldBorder());
+	    		textfield[lastMarkedLine][c].setBorder(Helper.defaultTextFieldBorder());
 	    	}
     	}
     }
@@ -93,7 +94,7 @@ public class DataTableForm extends JFrame
         contentPane = new JPanel(null);
         contentPane.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
         contentPane.setLayout(new GridBagLayout());
-        generujMenu();
+        generateMenu();
         contentPane.revalidate();
         scrollPane = new JScrollPane(contentPane);
         this.add(scrollPane);
@@ -124,7 +125,7 @@ public class DataTableForm extends JFrame
     	else
     	{
     		this.setTitle("No database is connected, please connect database.");
-    		generujMenu();
+    		generateMenu();
     	}
     }
     
@@ -150,17 +151,18 @@ public class DataTableForm extends JFrame
     	return this;
     }
     
-    public void generujMenu()
+    public void generateMenu()
     {
     	String[] menu = {"Database", "Operations", "Tools", "Help"};
     	String[] menuItems = {"Create", "Connect", "Export", "Import", "Exit", "", "Count", "Add", "Edit", "Delete", "Refresh/Load","", "Highest savings", "Lowest savings", "", "About"};
     	mac = new JMenuAutoCreator(menu, menuItems, 4);
-    	for(int i = 0; i < mac.getMenuItem().length; i++)
+    	JMenuItem[] jmi = mac.getMenuItem();
+    	for (int i = 0; i < jmi.length; i++)
     	{
-    		switch(mac.getMenuItem()[i].getName())
+    		switch (jmi[i].getName())
     		{
     			case "Count": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -171,7 +173,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Add": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -182,7 +184,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Edit": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -193,7 +195,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Create": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {		     
@@ -202,7 +204,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Connect": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {		 
@@ -211,7 +213,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Delete": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -227,7 +229,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Refresh/Load": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -237,7 +239,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "About": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -249,7 +251,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Exit": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -258,7 +260,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Highest savings": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -269,7 +271,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Lowest savings": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -280,7 +282,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Export": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -289,7 +291,7 @@ public class DataTableForm extends JFrame
     		        });
     			break;
     			case "Import": 
-    				mac.getMenuItem()[i].addActionListener(new ActionListener() 
+    				jmi[i].addActionListener(new ActionListener() 
     		    	{
     		            public void actionPerformed(ActionEvent evt) 
     		            {
@@ -299,6 +301,7 @@ public class DataTableForm extends JFrame
     			break;
     		}
     	}
+    	mac.setMenuItem(jmi);
     	this.setJMenuBar(mac.getJMenuBar());
     }
     
@@ -319,7 +322,7 @@ public class DataTableForm extends JFrame
     			value = Double.parseDouble(textfield[i][1].getText());
     		}
     	}
-    	this.x = index;
+    	this.lastMarkedLine = index;
     	for(int c = 0; c < 3; c++)
     	{
     		textfield[index][c].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
@@ -338,7 +341,7 @@ public class DataTableForm extends JFrame
     			value = Double.parseDouble(textfield[i][1].getText());
     		}
     	}
-    	this.x = index;
+    	this.lastMarkedLine = index;
     	for(int c = 0; c < 3; c++)
     	{
     		textfield[index][c].setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
@@ -365,7 +368,7 @@ public class DataTableForm extends JFrame
     		label[i] = new JLabel();
     		label[i].setFont(mainFont);
     		label[i].setText(labelTexts[i]);
-    		contentPane.add(label[i], getGBC(i, 0));
+    		contentPane.add(label[i], Helper.getGBC(gbc, i, 0));
     	}
     }
     
@@ -385,7 +388,7 @@ public class DataTableForm extends JFrame
 		        	textfield[x][i].setEnabled(false);
 		        	textfield[x][i].setText(listData[i]);
 		        	textfield[x][i].setFont(mainFont);
-		        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
+		        	contentPane.add(textfield[x][i], Helper.getGBC(gbc, i, x + 1));
 			    }
 	        }
     	}
@@ -407,7 +410,7 @@ public class DataTableForm extends JFrame
 		        	textfield[x][i].setEnabled(false);
 		        	textfield[x][i].setText(listData[i]);
 		        	textfield[x][i].setFont(mainFont);
-		        	contentPane.add(textfield[x][i], getGBC(i, x + 1));
+		        	contentPane.add(textfield[x][i], Helper.getGBC(gbc, i, x + 1));
 			    }
 	        }
     	}
@@ -417,12 +420,5 @@ public class DataTableForm extends JFrame
 	public List<Money> getData()
     {
     	return ((List<Money>)data);
-    }
-    
-	private GridBagConstraints getGBC(int x, int y)
-    {
-        gbc.gridx = x;
-        gbc.gridy = y;
-        return gbc;
     }
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 21.07.2020
  * Last Edit: 29.05.2021
  * @author Riyufuchi

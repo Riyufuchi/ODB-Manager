@@ -7,11 +7,11 @@ import javax.swing.JMenuItem;
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 31.05.2021
+ * Last Edit: 06.06.2021
  * @author Riyufuchi
- * @version 1.1
+ * @version 1.2
  * @since 1.0 
  */
 
@@ -133,6 +133,11 @@ public class JMenuAutoCreator
 			}
 			i2 = i;
 		}
+	}
+	
+	public void setMenuItem(JMenuItem[] jmi)
+	{
+		this.menuItem = jmi;
 	}
 	
 	public JMenuItem[] getMenuItem()

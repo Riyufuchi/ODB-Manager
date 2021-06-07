@@ -15,15 +15,16 @@ import javax.swing.JTextField;
 
 import JPA.CJPA;
 import Utils.FinalValues;
+import Utils.Helper;
 
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 06.06.2021
+ * Last Edit: 07.06.2021
  * @author Riyufuchi
- * @version 1.2
+ * @version 1.3
  * @since 1.0 
  */
 
@@ -84,10 +85,10 @@ public class DataConnectorForm extends JFrame implements KeyListener
          textfield = new JTextField();
          textfield.addKeyListener(this);
          vytvorLabely();
-         contentPane.add(textfield, getGBC(1, 1));
-         contentPane.add(comboBox, getGBC(1, 0));
-         contentPane.add(button1, getGBC(1, 2));
-         contentPane.add(button2, getGBC(0, 2));
+         contentPane.add(textfield, Helper.getGBC(gbc, 1, 1));
+         contentPane.add(comboBox, Helper.getGBC(gbc, 1, 0));
+         contentPane.add(button1, Helper.getGBC(gbc, 1, 2));
+         contentPane.add(button2, Helper.getGBC(gbc, 0, 2));
     }
     
     private void vytvorLabely()
@@ -97,15 +98,8 @@ public class DataConnectorForm extends JFrame implements KeyListener
     	{
     		label[i] = new JLabel();
     		label[i].setText(labelTexts[i]);
-    		contentPane.add(label[i], getGBC(0, i));
+    		contentPane.add(label[i], Helper.getGBC(gbc, 0, i));
     	}
-    }
-    
-    private GridBagConstraints getGBC(int x, int y)
-    {
-        gbc.gridx = x;
-        gbc.gridy = y;
-		return gbc;
     }
     
     public void keyTyped(KeyEvent e) 

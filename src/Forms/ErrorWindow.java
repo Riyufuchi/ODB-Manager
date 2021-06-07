@@ -13,7 +13,7 @@ import Utils.FinalValues;
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 13.07.2020
  * Last Edit: 06.06.2021
  * @author Riyufuchi

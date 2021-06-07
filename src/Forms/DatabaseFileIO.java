@@ -22,11 +22,11 @@ import Utils.XML;
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 31.05.2021
- * Last Edit: 06.06.2021
+ * Last Edit: 07.06.2021
  * @author Riyufuchi
- * @version 1.1
+ * @version 1.2
  * @since 1.3 
  */
 
@@ -91,7 +91,7 @@ public class DatabaseFileIO extends JFrame
     	{
     		comboBoxes[i] = new JComboBox<String>();
     		comboBoxes[i].setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
-    		contentPane.add(comboBoxes[i], getGBC(1, i));
+    		contentPane.add(comboBoxes[i], Helper.getGBC(gbc, 1, i));
     		for(int l = 0; l < comboBoxTexts[i].length; l++)
     		{
     			comboBoxes[i].addItem(comboBoxTexts[i][l]);
@@ -124,10 +124,10 @@ public class DatabaseFileIO extends JFrame
          setButtons();
          setTextFields();
          vytvorLabely();
-         contentPane.add(fileName, getGBC(1, 2));
-         contentPane.add(pathToFile, getGBC(1, 3));
-         contentPane.add(ok, getGBC(1, 4));
-         contentPane.add(cancel, getGBC(0, 4));
+         contentPane.add(fileName, Helper.getGBC(gbc, 1, 2));
+         contentPane.add(pathToFile, Helper.getGBC(gbc, 1, 3));
+         contentPane.add(ok, Helper.getGBC(gbc, 1, 4));
+         contentPane.add(cancel, Helper.getGBC(gbc, 0, 4));
     }
     
     private void vytvorLabely()
@@ -137,20 +137,13 @@ public class DatabaseFileIO extends JFrame
     	{
     		label[i] = new JLabel();
     		label[i].setText(labelTexts[i]);
-    		contentPane.add(label[i], getGBC(0, i));
+    		contentPane.add(label[i], Helper.getGBC(gbc, 0, i));
     	}
     }
     
     private void safelyClose()
     {
     	this.dispose();
-    }
-    
-    private GridBagConstraints getGBC(int x, int y)
-    {
-        gbc.gridx = x;
-        gbc.gridy = y;
-		return gbc;
     }
     
     private void exportNow()

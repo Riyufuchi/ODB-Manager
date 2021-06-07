@@ -1,6 +1,5 @@
 package Forms;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,13 +12,14 @@ import javax.swing.JPanel;
 
 import JPA.CJPA;
 import Utils.FinalValues;
+import Utils.Helper;
 
 /**
  * Copyright Header
  *
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 06.06.2021
+ * Last Edit: 07.06.2021
  * @author Riyufuchi
  * @version 1.1
  * @since 1.0
@@ -56,14 +56,14 @@ public class Operator extends JFrame
          contentPane = new JPanel(null);
          contentPane.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
          contentPane.setLayout(new GridBagLayout());
+         gbc = new GridBagConstraints();
+         gbc.fill = GridBagConstraints.HORIZONTAL;
     	 button1 = new JButton();
          button1.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
-         button1.setForeground(new Color(0,0,0));
-         button1.setText("Smazat záznam");
+         button1.setText("Delete");
          button2 = new JButton();
          button2.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
-         button2.setForeground(new Color(0,0,0));
-         button2.setText("Zavøít");
+         button2.setText("Close");
          vytvorLabely();
          comboBox = new JComboBox();
          comboBox.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
@@ -71,14 +71,9 @@ public class Operator extends JFrame
          {
         	 comboBox.addItem(Integer.toString(ID[i]));
          }
-         gbc = new GridBagConstraints();
-         for(int i = 0; i < labelTexts.length; i++)
-         {
-         	contentPane.add(getLabely(i), getGBC(0, i));
-         }
-         contentPane.add(comboBox, getGBC(1, 0));
-         contentPane.add(button1, getGBC(1, 2));
-         contentPane.add(button2, getGBC(0, 2));
+         contentPane.add(comboBox, Helper.getGBC(gbc, 1, 0));
+         contentPane.add(button1, Helper.getGBC(gbc, 1, 2));
+         contentPane.add(button2, Helper.getGBC(gbc, 0, 2));
     }
     
     private JLabel getLabely(int i)
@@ -93,15 +88,8 @@ public class Operator extends JFrame
     	{
     		label[i] = new JLabel();
     		label[i].setText(labelTexts[i]);
+    		contentPane.add(getLabely(i), Helper.getGBC(gbc, 0, i));
     	}
-    }
-    
-    private GridBagConstraints getGBC(int x, int y)
-    {
-    	gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = x;
-        gbc.gridy = y;
-		return gbc;
     }
     
     private void vytvoritUdalosti()

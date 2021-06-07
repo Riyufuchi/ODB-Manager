@@ -20,11 +20,11 @@ import Utils.Helper;
 /**
  * Copyright Header
  * 
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 06.06.2021
+ * Last Edit: 07.06.2021
  * @author Riyufuchi
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 
@@ -84,6 +84,8 @@ public class Counter extends JFrame
     	contentPane = new JPanel(null);
         contentPane.setBackground(FinalValues.DEFAULT_PANE_BACKGROUND);
         contentPane.setLayout(new GridBagLayout());
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
     	button1 = new JButton();
         button1.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
         button1.setText("Save to Database");
@@ -100,17 +102,14 @@ public class Counter extends JFrame
         	label = new JLabel[2];
         	label[0] = new JLabel("Sum:");
         	label[1] = new JLabel("Date:");
-	        gbc = new GridBagConstraints();
 	        for(int i = 0; i < label.length; i++)
 	        {
-	        	contentPane.add(label[i], getGBC(0, i + 1));
+	        	contentPane.add(label[i], Helper.getGBC(gbc, 0, i + 1));
 	        }
 	        for(int i = 0; i < textfield.length; i++)
 	        {
-	        	contentPane.add(textfield[i], getGBC(1, i + 1));
+	        	contentPane.add(textfield[i], Helper.getGBC(gbc, 1, i + 1));
 	        }
-	        contentPane.add(button1, getGBC(1, 7));
-	        contentPane.add(button2, getGBC(0, 7));
         }
         else
         {
@@ -120,24 +119,11 @@ public class Counter extends JFrame
 	        {
 	        	textfield[i] = new JTextField();
 	        	textfield[i].setName(labelTexts[i]);
+	        	contentPane.add(textfield[i], Helper.getGBC(gbc, 1, i + 1));
 	        }
-	        gbc = new GridBagConstraints();
-	        for(int i = 0; i < labelTexts.length; i++)
-	        {
-	        	contentPane.add(getLabely(i), getGBC(0, i + 1));
-	        }
-	        for(int i = 0; i < textfield.length; i++)
-	        {
-	        	contentPane.add(textfield[i], getGBC(1, i + 1));
-	        }
-	        contentPane.add(button1, getGBC(1, 7));
-	        contentPane.add(button2, getGBC(0, 7));
         }
-    }
-    
-    private JLabel getLabely(int i)
-    {
-    	return label[i];
+        contentPane.add(button1, Helper.getGBC(gbc, 1, 7));
+        contentPane.add(button2, Helper.getGBC(gbc, 0, 7));
     }
     
     private void vytvorLabely()
@@ -147,6 +133,7 @@ public class Counter extends JFrame
     	{
     		label[i] = new JLabel();
     		label[i].setText(labelTexts[i]);
+    		contentPane.add(label[i], Helper.getGBC(gbc, 0, i + 1));
     	}
     }
    
@@ -197,14 +184,6 @@ public class Counter extends JFrame
     		Helper.makeBorder(textfield[i], Helper.defaultTextFieldBorder());
     	}
     	saveToDB = true;
-    }
-    
-    private GridBagConstraints getGBC(int x, int y)
-    {
-    	gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = x;
-        gbc.gridy = y;
-		return gbc;
     }
     
     private void checkDataPersistance()

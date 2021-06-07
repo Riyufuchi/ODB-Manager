@@ -32,11 +32,11 @@ import Forms.ErrorWindow;
 import JPA.Money;
 
 /**
- * Projetct: ODB Manager
+ * Project: ODB Manager
  * Created On: 30.05.2021
- * Last Edit: 02.06.2021
+ * Last Edit: 06.06.2021
  * @author Riyufuchi
- * @version 1.0
+ * @version 1.1
  * @since 1.3 
  */
 
@@ -240,7 +240,7 @@ public class XML extends org.xml.sax.helpers.DefaultHandler
 			case FinalValues.DATE:
 				writeDate = false;
 				break;
-			case FinalValues.SubELEMENT:
+			case FinalValues.SUB_ELEMENT:
 				list.add(new Money(id, sum, date));
 				id++;
 				break;
