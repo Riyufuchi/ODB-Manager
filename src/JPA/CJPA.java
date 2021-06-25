@@ -23,7 +23,7 @@ import Forms.ErrorWindow;
  * 
  * Project: ODB Manager
  * Created On: 13.07.2020
- * Last Edit: 08.05.2021
+ * Last Edit: 25.06.2021
  * @author Riyufuchi
  * @version 1.1
  * @since 1.0
@@ -63,7 +63,7 @@ public class CJPA
     	}
     	catch(Exception e)
     	{
-    		new ErrorWindow("Error whan closing", e.getMessage());
+    		//new ErrorWindow("Error when closing", e.getMessage());
     	}
     }
     
