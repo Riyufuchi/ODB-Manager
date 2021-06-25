@@ -3,6 +3,7 @@ Copyright (c) 2021 Riyufuchi
 This licence is only aplicable for code with my copyright header and not for used libraries.
 The code for this software is public for DEMOSTRATIONAL, PRESTATIONAL and EDUCATONAL purposes. 
 This software can be used for personal use (without limitation the rights to use, copy and modify), but not for redistribution with goal of making profit.  
+If modification are made end user have to be notified.
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
