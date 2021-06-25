@@ -63,15 +63,23 @@ public class DataTableForm extends JFrame
         this.gbc.fill = GridBagConstraints.HORIZONTAL;
         switch(inputFormName)
     	{
-    		case "Neutral": neutral(); break;
-	    	case "Money": money(); break;
+    		case "Neutral": getQuery = "SELECT c FROM Guest c"; break;
+	    	case "Money": getQuery = "SELECT c FROM Money c"; break;
     	}
+        connectDatabase();
         this.addWindowStateListener(new WindowAdapter()
         {
         	public void windowStateChanged(WindowEvent e)
         	{
         		borderCorrection();
         	}
+        });
+        this.addWindowListener(new WindowAdapter() 
+        {
+        	  public void windowClosing(WindowEvent we) 
+        	  {
+        		  odb.closeDB();
+        	  }
         });
         this.pack();
         this.setVisible(true);
@@ -98,18 +106,6 @@ public class DataTableForm extends JFrame
         contentPane.revalidate();
         scrollPane = new JScrollPane(contentPane);
         this.add(scrollPane);
-    }
-    
-    private void neutral()
-    {
-    	getQuery = "SELECT c FROM Guest c";
-    	connectDatabase();
-    }
-    
-    private void money()
-    {
-    	getQuery = "SELECT c FROM Money c";
-    	connectDatabase();
     }
     
     private void connectDatabase()

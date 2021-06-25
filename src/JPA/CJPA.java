@@ -55,6 +55,18 @@ public class CJPA
         }
     }
     
+    public void closeDB()
+    {
+    	try 
+    	{
+    		em.close();
+    	}
+    	catch(Exception e)
+    	{
+    		new ErrorWindow("Error whan closing", e.getMessage());
+    	}
+    }
+    
     public void createDB(String name)
     {
     	try

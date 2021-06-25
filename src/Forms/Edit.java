@@ -117,19 +117,7 @@ public class Edit extends JFrame
     {
     	if(!text.equals(""))
     	{
-    		String number = "";
-    		for(int i = 0; i < text.length(); i++)
-        	{
-    			if(Character.isDigit(text.charAt(i)))
-	        	{
-    				number = number + text.charAt(i);
-	        	}
-    			else if(text.charAt(i) == ',')
-		        {
-	        		number = number + '.';
-		        }
-	    	}
-    		textfield[id].setText(number);
+    		textfield[id].setText(text.replace(',', '.'));
     	}
     	else
     	{
