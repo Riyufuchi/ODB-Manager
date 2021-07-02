@@ -70,12 +70,12 @@ public class FilesIO
 		try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(path))) 
 		{
 			for (Money m: data) 
-            {
+			{
 				dos.writeDouble(m.getMoneySum());
-                dos.writeUTF(m.getDate());
-                dos.flush();
-            }
-        }
+				dos.writeUTF(m.getDate());
+				dos.flush();
+			}
+		}
 		catch (IOException e) 
 		{
 			new ErrorWindow("IO error", e.getMessage());
@@ -97,7 +97,7 @@ public class FilesIO
 				date = dis.readUTF();
 				l.add(new Money(i, money, date));
 				i++;
-            }
+			}
 		}
 		catch (IOException e) 
 		{
