@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import JPA.Money;
+import Utils.FilesIO;
 import Utils.FinalValues;
 import Utils.Helper;
 import Utils.XML;
@@ -38,7 +39,7 @@ public class DatabaseFileIO extends JFrame
     private JLabel[] label;
     private String[] labelTexts = {"File type:", "Path type:", "File name:", "Actual path:"};
     private String[][] comboBoxTexts = {
-    		{".csv", ".xml"},
+    		{".csv", ".xml", ".dat"},
     		{"Same as Database", "Custom"}};
     private GridBagConstraints gbc;
     private JComboBox<String>[] comboBoxes;
@@ -113,6 +114,8 @@ public class DatabaseFileIO extends JFrame
 	{
 		fileName = new JTextField();
 		pathToFile = new JTextField();
+		pathToFile.setText("path");
+		pathToFile.setEnabled(false);
 	}
     
 	private void setComponents()
@@ -153,11 +156,14 @@ public class DatabaseFileIO extends JFrame
     		switch(comboBoxes[0].getSelectedIndex())
     		{
     			case 0: 
-    				Helper.saveToCVS(pathToFile.getText(), list); 
+    				FilesIO.saveToCVS(getPath(), list); 
     				break;
     			case 1: 
-    				XML xml = new XML(pathToFile.getText(), "MoneyExport", "Money");
+    				XML xml = new XML(getPath(), "MoneyExport", "Money");
     				xml.exportXML(list);
+    				break;
+    			case 2:
+    				FilesIO.writeBinary(getPath(), list);
     				break;
     		}
 		}
@@ -171,16 +177,24 @@ public class DatabaseFileIO extends JFrame
     		switch(comboBoxes[0].getSelectedIndex())
     		{
     			case 0: 
-    				list = Helper.loadFromCVS(pathToFile.getText());
+    				list = FilesIO.loadFromCVS(getPath());
     				break;
     			case 1: 
-    				XML xml = new XML(pathToFile.getText(), "MoneyExport", "Money");
+    				XML xml = new XML(getPath(), "MoneyExport", "Money");
     				xml.parsujMoney();
     				list = xml.getList();
+    				break;
+    			case 2:
+    				list = FilesIO.loadBinary(getPath());
     				break;
     		}
 		}
     	parentFrame.loadData(list);
+    }
+    
+    public String getPath()
+    {
+    	return fileName.getText() + comboBoxes[0].getSelectedItem();
     }
     
     private void vytvoritUdalosti()
