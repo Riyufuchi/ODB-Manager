@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_211">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/OpenJDKv16"/>
 	<classpathentry exported="true" kind="lib" path="D:/Files/Programming/Java/Eclipse/HOTEL/lib/converter.jar"/>
 	<classpathentry exported="true" kind="lib" path="D:/Files/Programming/Java/Eclipse/HOTEL/lib/javax.ejb.jar"/>
 	<classpathentry exported="true" kind="lib" path="D:/Files/Programming/Java/Eclipse/HOTEL/lib/javax.ejb-3.1.2.2-sources.jar"/>

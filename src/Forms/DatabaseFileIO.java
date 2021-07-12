@@ -25,9 +25,9 @@ import Utils.XML;
  * 
  * Project: ODB Manager
  * Created On: 31.05.2021
- * Last Edit: 07.06.2021
+ * Last Edit: 12.07.2021
  * @author Riyufuchi
- * @version 1.2
+ * @version 1.3
  * @since 1.3 
  */
 
@@ -105,7 +105,14 @@ public class DatabaseFileIO extends JFrame
 		ok = new JButton();
 		cancel = new JButton();
         ok.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
-        ok.setText("Import data");
+        if(export)
+        {
+        	ok.setText("Export data");
+        }
+        else
+        {
+        	ok.setText("Import data");
+        }
         cancel.setBackground(FinalValues.DEFAULT_BUTTON_BACKGROUND);
         cancel.setText("Cancel");
 	}

@@ -5,6 +5,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -22,9 +25,9 @@ import Utils.Helper;
  * 
  * Project: ODB Manager
  * Created On: 21.07.2020
- * Last Edit: 07.06.2021
+ * Last Edit: 12.06.2021
  * @author Riyufuchi
- * @version 1.2
+ * @version 1.3
  * @since 1.0
  */
 
@@ -121,6 +124,7 @@ public class Counter extends JFrame
 	        	textfield[i].setName(labelTexts[i]);
 	        	contentPane.add(textfield[i], Helper.getGBC(gbc, 1, i + 1));
 	        }
+	        textfield[5].setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
         contentPane.add(button1, Helper.getGBC(gbc, 1, 7));
         contentPane.add(button2, Helper.getGBC(gbc, 0, 7));
@@ -166,7 +170,7 @@ public class Counter extends JFrame
     	}
     	else
     	{
-    		new ErrorWindow("Chybnì zadaná hodnota", "Error at: " + textfield[id].getName() + " Invalid or Missing value");
+    		new ErrorWindow("Wrong value entered", "Error at: " + textfield[id].getName() + " Invalid or Missing value");
     		makeRedBorder(control);
     	}
     }

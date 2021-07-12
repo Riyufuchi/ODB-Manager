@@ -13,7 +13,7 @@ import Forms.DataTableForm;
  * @since 1.0 
  */
 
-public class Main 
+public class MainClass 
 {	
 	public static void main(String[] args) 
 	{
